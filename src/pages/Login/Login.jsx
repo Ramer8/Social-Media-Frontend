@@ -4,8 +4,16 @@ import { CustomInput } from "../../common/CustomInput/CustomInput"
 
 import "./Login.css"
 import { loginMe } from "../../services/apiCalls"
+import { useNavigate } from "react-router-dom"
 
-export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
+export const Login = ({
+  msgError,
+  setMsgError,
+  credential,
+  setCredential,
+  usefullDataToken,
+  setUsefullDataToken,
+}) => {
   // const [msgError, setMsgError] = useState("")
 
   const [credenciales, setCredenciales] = useState({
@@ -13,25 +21,14 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
     password: "",
   })
 
-  const ERROR_MSG_TIME = 4000
+  const navigate = useNavigate()
 
-  console.log(credential)
+  // const ERROR_MSG_TIME = 4000
+
   if (credential) {
     credenciales.email = credential.email
+    credenciales.password = credential.password
   }
-
-  //ya esta el redireccionamiento a login luego de register, poner autocompletar en los campos asi es mas facil logearse.
-  // y luego del login ir a home para mostrar el perfil..
-  //..poner un if si credential tiene valor setearlo en e.target.value
-
-  // const inputHandlerPostRegister = (e) => {
-  //   e.target.value = "caca"
-
-  //   setCredenciales((prevState) => ({
-  //     ...prevState,
-  //     [e.target.name]: e.target.value,
-  //   }))
-  // }
 
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
@@ -60,9 +57,7 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
 
     if (!fetched.success) {
       setMsgError(fetched.message)
-      setTimeout(() => {
-        setMsgError("")
-      }, ERROR_MSG_TIME)
+
       return
     }
     const decodificado = decodeToken(fetched.token)
@@ -70,7 +65,13 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
     sessionStorage.setItem("token", fetched)
     sessionStorage.setItem("user", JSON.stringify(decodificado))
 
-    //redireccion a Home
+    setUsefullDataToken({
+      tokenData: decodeToken(fetched.token),
+      token: fetched.token,
+    })
+
+    //Home redirected
+    navigate("/")
   }
 
   return (
@@ -79,8 +80,6 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
       <CustomInput
         design="inputDesign"
         type="email"
-        //   la clave para que el bindeo funcione es que la propiedad name se llame
-        //   exactamente igual que la propiedad homónima en el hook de estado, ejemplo: credenciales.email
         name="email"
         value={credenciales.email || ""}
         placeholder="write your email...."
@@ -89,8 +88,6 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
       <CustomInput
         design="inputDesign"
         type="password"
-        //   la clave para que el bindeo funcione es que la propiedad name se llame
-        //   exactamente igual que la propiedad homónima en el hook de estado, ejemplo: credenciales.password
         name="password"
         value={credenciales.password || ""}
         placeholder="write your password...."

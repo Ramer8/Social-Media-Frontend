@@ -6,6 +6,8 @@ import { Register } from "../Register/Register"
 
 export const Body = () => {
   const [msgError, setMsgError] = useState("")
+  const [usefullDataToken, setUsefullDataToken] = useState()
+
   const [credential, setCredential] = useState({
     name: "",
     email: "",
@@ -15,7 +17,15 @@ export const Body = () => {
   return (
     <Routes>
       <Route path="*" element={<Navigate to={"/"} replace />} />
-      <Route path="/" element={<Home />} />
+      <Route
+        path="/"
+        element={
+          <Home
+            usefullDataToken={usefullDataToken}
+            setUsefullDataToken={setUsefullDataToken}
+          />
+        }
+      />
       <Route
         path="/login"
         element={
@@ -24,6 +34,8 @@ export const Body = () => {
             setMsgError={setMsgError}
             credential={credential}
             setCredential={setCredential}
+            usefullDataToken={usefullDataToken}
+            setUsefullDataToken={setUsefullDataToken}
           />
         }
       />
