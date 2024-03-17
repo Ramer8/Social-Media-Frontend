@@ -1,0 +1,17 @@
+
+.headerDesign {
+    height: 16vh;
+    width: 100vw;
+
+    background-color:cadetblue;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+}
