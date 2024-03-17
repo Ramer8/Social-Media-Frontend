@@ -16,6 +16,7 @@ export const Home = ({
         const fetched = await fetchMyProfile(usefullDataToken?.token)
         if (!fetched?.success) {
           //  setMsgError(fetched.message)
+
           throw new Error("Failed to fetch profile data")
         }
         const data = await fetched
