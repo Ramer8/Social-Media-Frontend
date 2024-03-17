@@ -13,6 +13,13 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
     password: "",
   })
 
+  const ERROR_MSG_TIME = 4000
+
+  console.log(credential)
+  if (credential) {
+    credenciales.email = credential.email
+  }
+
   //ya esta el redireccionamiento a login luego de register, poner autocompletar en los campos asi es mas facil logearse.
   // y luego del login ir a home para mostrar el perfil..
   //..poner un if si credential tiene valor setearlo en e.target.value
@@ -53,6 +60,9 @@ export const Login = ({ msgError, setMsgError, credential, setCredential }) => {
 
     if (!fetched.success) {
       setMsgError(fetched.message)
+      setTimeout(() => {
+        setMsgError("")
+      }, ERROR_MSG_TIME)
       return
     }
     const decodificado = decodeToken(fetched.token)

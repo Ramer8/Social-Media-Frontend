@@ -29,7 +29,14 @@ export const Body = () => {
       />
       <Route
         path="/register"
-        element={<Register msgError={msgError} setMsgError={setMsgError} />}
+        element={
+          <Register
+            msgError={msgError}
+            setMsgError={setMsgError}
+            credential={credential}
+            setCredential={setCredential}
+          />
+        }
       />
     </Routes>
   )

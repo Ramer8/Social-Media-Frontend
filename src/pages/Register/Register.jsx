@@ -3,7 +3,12 @@ import "./Register.css"
 import { registerMe } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput"
 import { useNavigate } from "react-router-dom"
-export const Register = ({ msgError, setMsgError }) => {
+export const Register = ({
+  msgError,
+  setMsgError,
+  credential,
+  setCredential,
+}) => {
   const [credenciales, setCredenciales] = useState({
     name: "",
     email: "",
@@ -28,6 +33,7 @@ export const Register = ({ msgError, setMsgError }) => {
     const fetched = await registerMe(credenciales)
 
     if (fetched.success) {
+      setCredential(credenciales)
       navigate("/login")
     }
 
