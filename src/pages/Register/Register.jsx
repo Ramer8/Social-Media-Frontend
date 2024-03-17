@@ -19,6 +19,7 @@ export const Register = ({
   const ERROR_MSG_TIME = 3000
 
   const navigate = useNavigate()
+
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
       ...prevState,

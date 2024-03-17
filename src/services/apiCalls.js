@@ -51,13 +51,13 @@ export const registerMe = async (credenciales) => {
     return error
   }
 }
-export const fetchMyProfile = async (credenciales) => {
+export const fetchMyProfile = async (token) => {
   const options = {
-    method: "POST", //  envio por post  email y password para logearme
+    method: "GET",
     headers: {
-      "Content-Type": "application/json", // Esto para que es?
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(credenciales),
   }
   try {
     const response = await fetch(
@@ -66,7 +66,6 @@ export const fetchMyProfile = async (credenciales) => {
     )
 
     const data = await response.json()
-    console.log(data)
     if (!data.success) {
       throw new Error(data.message)
     }

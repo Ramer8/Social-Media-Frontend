@@ -25,10 +25,10 @@ export const Login = ({
 
   // const ERROR_MSG_TIME = 4000
 
-  if (credential) {
-    credenciales.email = credential.email
-    credenciales.password = credential.password
-  }
+  // if (credential) {
+  //   credenciales.email = credential.email
+  //   credenciales.password = credential.password
+  // }
   // const { name, ...newcredential } = credential
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
@@ -85,7 +85,7 @@ export const Login = ({
         design="inputDesign"
         type="email"
         name="email"
-        value={credenciales.email || credential.email}
+        value={credenciales.email || ""}
         placeholder="write your email...."
         functionChange={inputHandler}
       />
@@ -93,7 +93,7 @@ export const Login = ({
         design="inputDesign"
         type="password"
         name="password"
-        value={credenciales.password || credential.password}
+        value={credenciales.password || ""}
         placeholder="write your password...."
         functionChange={inputHandler}
       />
