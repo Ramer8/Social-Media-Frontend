@@ -29,7 +29,7 @@ export const Login = ({
     credenciales.email = credential.email
     credenciales.password = credential.password
   }
-
+  // const { name, ...newcredential } = credential
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
       ...prevState,
@@ -54,6 +54,10 @@ export const Login = ({
     }
 
     const fetched = await loginMe(credenciales)
+
+    if (fetched.success) {
+      setCredential("")
+    }
 
     if (!fetched.success) {
       setMsgError(fetched.message)
@@ -81,7 +85,7 @@ export const Login = ({
         design="inputDesign"
         type="email"
         name="email"
-        value={credenciales.email || ""}
+        value={credenciales.email || credential.email}
         placeholder="write your email...."
         functionChange={inputHandler}
       />
@@ -89,7 +93,7 @@ export const Login = ({
         design="inputDesign"
         type="password"
         name="password"
-        value={credenciales.password || ""}
+        value={credenciales.password || credential.password}
         placeholder="write your password...."
         functionChange={inputHandler}
       />
