@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { fetchMyProfile } from "../../services/apiCalls"
 import "./Home.css"
+import Card from "../../common/Card/Card"
 
 export const Home = ({
   usefullDataToken,
@@ -16,8 +17,10 @@ export const Home = ({
         const fetched = await fetchMyProfile(usefullDataToken?.token)
         if (!fetched?.success) {
           //  setMsgError(fetched.message)
-
-          throw new Error("Failed to fetch profile data")
+          if (!usefullDataToken === undefined) {
+            throw new Error("Failed to fetch profile data")
+          }
+          //  throw new Error("Failed to fetch profile data")
         }
         const data = await fetched
         setDataToShow(data.data)
@@ -33,13 +36,17 @@ export const Home = ({
     <div className="homeDesign">
       <div>{msgError}</div>
       {dataToShow && (
-        <div>
-          <p>Name: {dataToShow.name}</p>
-          <p>Email: {dataToShow.email}</p>
-          <p>id: {dataToShow._id}</p>
-          <p>followers: {dataToShow.followers}</p>
-          <p>following: {dataToShow.following}</p>
-        </div>
+        <>
+          <Card
+            name={dataToShow?.name}
+            email={dataToShow.email}
+            id={dataToShow._id}
+            followers={dataToShow.followers}
+            following={dataToShow.following}
+            usefullDataToken={usefullDataToken}
+            setUsefullDataToken={setUsefullDataToken}
+          />
+        </>
       )}
     </div>
   )

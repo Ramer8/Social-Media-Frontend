@@ -23,7 +23,11 @@ export const Login = ({
 
   const navigate = useNavigate()
 
-  // const ERROR_MSG_TIME = 4000
+  const ERROR_MSG_TIME = 4000
+
+  setTimeout(() => {
+    setMsgError("")
+  }, ERROR_MSG_TIME)
 
   // if (credential) {
   //   credenciales.email = credential.email
@@ -36,14 +40,6 @@ export const Login = ({
       [e.target.name]: e.target.value,
     }))
   }
-  //Asignación dinámica
-  //Es ilegal modificar el estado en React directamente
-  //Primero creamos una variable placeholder llamada prevState
-  //prevState preserva el estado original, es una copia del original.
-  //aqui preservamos el estado mediante spread rest
-  //si escribo en email, e.target.name valdrá.... email
-  //si escribo en password, e.target.name valdrá.... password
-  //al usar los corchetes, estamos entrando en la propiedad del objeto
 
   const logMe = async () => {
     for (let credencial in credenciales) {
@@ -86,7 +82,7 @@ export const Login = ({
         type="email"
         name="email"
         value={credenciales.email || ""}
-        placeholder="write your email...."
+        placeholder="email"
         functionChange={inputHandler}
       />
       <CustomInput
@@ -94,13 +90,13 @@ export const Login = ({
         type="password"
         name="password"
         value={credenciales.password || ""}
-        placeholder="write your password...."
+        placeholder="password"
         functionChange={inputHandler}
       />
       <div className="loginButton" onClick={logMe}>
         Log me!
       </div>
-      <div>{msgError}</div>
+      {msgError && <div className="error">{msgError}</div>}
     </div>
   )
 }

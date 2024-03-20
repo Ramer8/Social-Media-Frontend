@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: lightskyblue;
+    /* background-color: lightskyblue; */
 }
 
 .loginButton {
@@ -22,20 +22,30 @@
     text-transform: uppercase;
     font-weight: 900;
     font-size: medium;
-    background-color: blue;
+    background-color: violet;
     border-radius: 0.4em;
     transition: 0.4s;
-    color: white;
+    color: black;
+    font-weight: bolder !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 10px 10px 60px white;
+    box-shadow: 10px 10px 60px grey;
 }
 
 .loginButton:hover {
 
     cursor: pointer;
-    color: lightgrey;
     transition: 0.3s;
-    box-shadow: 10px 10px 60px grey;
+    box-shadow: 10px 10px 60px white;
+    box-shadow: 10px 10px 60px fuchsia;
+}
+
+.error {
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    width: max-content;
+    border-radius: 2em;
+    padding: 1em;
 }

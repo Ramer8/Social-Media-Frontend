@@ -7,7 +7,7 @@
     justify-content: center;
     align-items: center;
 
-    background-color: lightskyblue;
+    /* background-color: lightskyblue; */
 }
 
 .registerButton {
@@ -19,14 +19,14 @@
     text-transform: uppercase;
     font-weight: 900;
     font-size: medium;
-    background-color: green;
+    background-color: fuchsia;
     border-radius: 0.4em;
     transition: 0.4s;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 10px 10px 60px white;
+    box-shadow: 10px 10px 60px grey;
 }
 
 .registerButton:hover {
@@ -34,5 +34,14 @@
     cursor: pointer;
     color: lightgrey;
     transition: 0.3s;
-    box-shadow: 10px 10px 60px grey;
+    box-shadow: 10px 10px 60px white;
+}
+
+.error {
+    background-color: red;
+    color: white;
+    font-weight: bolder;
+    width: max-content;
+    border-radius: 2em;
+    padding: 1em;
 }

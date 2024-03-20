@@ -1,10 +1,11 @@
-
 .headerDesign {
-    height: 16vh;
+    height: 9vh;
     width: 100vw;
 
-    background-color:cadetblue;
+    /* background-color: cadetblue; */
 
+    border: solid 1px grey;
+    border-radius: 2em;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;

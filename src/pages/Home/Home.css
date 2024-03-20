@@ -5,6 +5,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    background-color: lightskyblue;
+    font-size: medium;
+    font-weight: bolder;
+    color: whitesmoke
+        /* background-color: whitesmoke; */
 }

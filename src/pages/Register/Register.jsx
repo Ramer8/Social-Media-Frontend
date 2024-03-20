@@ -20,6 +20,10 @@ export const Register = ({
 
   const navigate = useNavigate()
 
+  setTimeout(() => {
+    setMsgError("")
+  }, ERROR_MSG_TIME)
+
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
       ...prevState,
@@ -98,7 +102,7 @@ export const Register = ({
       >
         {loadingFlag ? "Register succesfully" : "Register me!"}
       </div>
-      <div>{msgError}</div>
+      {msgError && <div className="error">{msgError}</div>}
     </div>
   )
 }
