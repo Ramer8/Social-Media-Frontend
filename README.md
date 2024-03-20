@@ -18,17 +18,17 @@ Very thanks for interest in my project. Is first design of Social Media Backend 
 
 ---
 
-#### Description
+### Description
 
 The project consists of creating a social network where users can register, access the network and interact with each other.
 Users can also follow or unfollow other users, write comments on their profiles or posts.
 
 ---
 
-#### Develop
+### Develop
 
 Is a SPA (single-page application) with react router dom to organize the routes.
-The frontend is already connected to mongoDB data base created in Social Media Backend
+The frontend is already connected to mongoDB data base created in Social Media Backend.
 The data showed or the new users create are created in existing mongoDB data base.
 
 #### Routes
@@ -43,7 +43,7 @@ The data showed or the new users create are created in existing mongoDB data bas
 
 ---
 
-##### Login page
+#### Login page
 
 `http://localhost:5173/login`
 
@@ -51,7 +51,7 @@ The data showed or the new users create are created in existing mongoDB data bas
 
 ---
 
-##### Home page
+#### Home page
 
 `http://localhost:5173`
 
@@ -59,7 +59,7 @@ The data showed or the new users create are created in existing mongoDB data bas
 
 ---
 
-#### Next steps
+### Next steps
 
 Continue build components, buttons and inputs to from respective end points created in the backend
 Add Redux to use a global state to binding data of components.
