@@ -101,7 +101,9 @@ export const Login = ({
     <div className="loginDesign">
       {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
       <CustomInput
-        design="inputDesign"
+        className={`inputDesign ${
+          credencialesError.emailError !== "" ? "inputDesignError" : ""
+        }`}
         type="email"
         name="email"
         value={credenciales.email || ""}
@@ -110,7 +112,9 @@ export const Login = ({
         onBlurFunction={(e) => checkError(e)}
       />
       <CustomInput
-        design="inputDesign"
+        className={`inputDesign ${
+          credencialesError.passwordError !== "" ? "inputDesignError" : ""
+        }`}
         type="password"
         name="password"
         value={credenciales.password || ""}
@@ -127,7 +131,7 @@ export const Login = ({
         {credencialesError.emailError && (
           <div className="error">{credencialesError.emailError}</div>
         )}
-        {credencialesError.passwordBodyError && (
+        {credencialesError.passwordError && (
           <div className="error">{credencialesError.passwordError}</div>
         )}
         {msgError && <div className="error">{msgError}</div>}

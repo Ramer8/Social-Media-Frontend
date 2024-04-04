@@ -4,6 +4,7 @@ import { registerMe } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput"
 import { useNavigate } from "react-router-dom"
 import Spinner from "../../common/Spinner/Spinner"
+import { validame } from "../../utils/functions"
 export const Register = ({
   msgError,
   setMsgError,
@@ -16,6 +17,12 @@ export const Register = ({
     email: "",
     password: "",
   })
+
+  const [credencialesError, setCredencialesError] = useState({
+    nameError: "",
+    emailError: "",
+    passwordError: "",
+  })
   const ERROR_MSG_TIME = 3000
 
   const navigate = useNavigate()
@@ -23,6 +30,16 @@ export const Register = ({
   setTimeout(() => {
     setMsgError("")
   }, ERROR_MSG_TIME)
+
+  const checkError = (e) => {
+    const error = validame(e.target.name, e.target.value)
+
+    setCredencialesError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }))
+    console.log(credencialesError)
+  }
 
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
@@ -56,40 +73,49 @@ export const Register = ({
     //Login redirected
     navigate("/login")
   }
+  console.log(credencialesError)
   return (
     <div className="registerDesign">
       {!loadingFlag ? (
         <div>
           {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
           <CustomInput
-            design="inputDesign"
+            className={`inputDesign ${
+              credencialesError.nameError !== "" ? "inputDesignError" : ""
+            }`}
             type="text"
             name="name"
             value={credenciales.name || ""}
             placeholder="write your name...."
             functionChange={inputHandler}
+            onBlurFunction={(e) => checkError(e)}
           />
           <CustomInput
-            design="inputDesign"
+            className={`inputDesign ${
+              credencialesError.emailError !== "" ? "inputDesignError" : ""
+            }`}
             type="email"
             name="email"
             value={credenciales.email || ""}
             placeholder="write your email...."
             functionChange={inputHandler}
+            onBlurFunction={(e) => checkError(e)}
           />
           <CustomInput
-            design="inputDesign"
+            className={`inputDesign ${
+              credencialesError.passwordError !== "" ? "inputDesignError" : ""
+            }`}
             type="password"
             name="password"
             value={credenciales.password || ""}
             placeholder="write your password...."
             functionChange={inputHandler}
+            onBlurFunction={(e) => checkError(e)}
           />
         </div>
       ) : (
         <Spinner />
       )}
-
       <div
         className="registerButton"
         onClick={
@@ -102,7 +128,15 @@ export const Register = ({
       >
         {loadingFlag ? "Register succesfully" : "Register me!"}
       </div>
-      {msgError && <div className="error">{msgError}</div>}
+      <div className="footer">
+        {credencialesError.emailError && (
+          <div className="error">{credencialesError.emailError}</div>
+        )}
+        {credencialesError.passwordError && (
+          <div className="error">{credencialesError.passwordError}</div>
+        )}
+        {msgError && <div className="error">{msgError}</div>}
+      </div>
     </div>
   )
 }

@@ -1,6 +1,6 @@
 import "./CustomInput.css"
 export const CustomInput = ({
-  design,
+  className,
   type,
   name,
   value,
@@ -10,7 +10,7 @@ export const CustomInput = ({
 }) => {
   return (
     <input
-      className={design}
+      className={className}
       type={type}
       name={name}
       value={value}
