@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { decodeToken } from "react-jwt"
 import { CustomInput } from "../../common/CustomInput/CustomInput"
 
 import "./Login.css"
 import { loginMe } from "../../services/apiCalls"
 import { useNavigate } from "react-router-dom"
+import { validame } from "../../utils/functions"
 
 export const Login = ({
   msgError,
@@ -21,13 +22,28 @@ export const Login = ({
     password: "",
   })
 
-  const navigate = useNavigate()
+  const [credencialesError, setCredencialesError] = useState({
+    emailError: "",
+    passwordError: "",
+  })
 
   const ERROR_MSG_TIME = 4000
+
+  const navigate = useNavigate()
 
   setTimeout(() => {
     setMsgError("")
   }, ERROR_MSG_TIME)
+
+  const checkError = (e) => {
+    const error = validame(e.target.name, e.target.value)
+
+    setCredencialesError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }))
+    console.log(credencialesError)
+  }
 
   // if (credential) {
   //   credenciales.email = credential.email
@@ -61,6 +77,13 @@ export const Login = ({
       return
     }
     const decodificado = decodeToken(fetched.token)
+    console.log(decodificado)
+
+    //ahora si funciona esta forma de guardar en localstorage
+    localStorage.setItem("decodificado", JSON.stringify(decodificado))
+    let a = JSON.parse(localStorage.getItem("decodificado"))
+
+    console.log(a)
 
     sessionStorage.setItem("token", fetched)
     sessionStorage.setItem("user", JSON.stringify(decodificado))
@@ -84,6 +107,7 @@ export const Login = ({
         value={credenciales.email || ""}
         placeholder="email"
         functionChange={inputHandler}
+        onBlurFunction={(e) => checkError(e)}
       />
       <CustomInput
         design="inputDesign"
@@ -92,11 +116,22 @@ export const Login = ({
         value={credenciales.password || ""}
         placeholder="password"
         functionChange={inputHandler}
+        onBlurFunction={(e) => checkError(e)}
       />
+
       <div className="loginButton" onClick={logMe}>
         Log me!
       </div>
-      {msgError && <div className="error">{msgError}</div>}
+
+      <div className="footer">
+        {credencialesError.emailError && (
+          <div className="error">{credencialesError.emailError}</div>
+        )}
+        {credencialesError.passwordBodyError && (
+          <div className="error">{credencialesError.passwordError}</div>
+        )}
+        {msgError && <div className="error">{msgError}</div>}
+      </div>
     </div>
   )
 }
