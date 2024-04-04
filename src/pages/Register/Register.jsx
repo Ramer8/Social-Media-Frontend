@@ -1,10 +1,12 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./Register.css"
 import { registerMe } from "../../services/apiCalls"
 import { CustomInput } from "../../common/CustomInput/CustomInput"
 import { useNavigate } from "react-router-dom"
 import Spinner from "../../common/Spinner/Spinner"
 import { validame } from "../../utils/functions"
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 export const Register = ({
   msgError,
   setMsgError,
@@ -51,6 +53,7 @@ export const Register = ({
   const regMe = async () => {
     for (let credencial in credenciales) {
       if (credenciales[credencial] === "") {
+        toast.warn("No has rellenado todos los campos")
         setMsgError("No has rellenado todos los campos")
         return
       }
@@ -73,7 +76,29 @@ export const Register = ({
     //Login redirected
     navigate("/login")
   }
-  console.log(credencialesError)
+
+  useEffect(() => {
+    credencialesError.emailError &&
+      toast.warn(credencialesError.emailError, { theme: "dark" })
+    credencialesError.passwordError &&
+      toast.warn(credencialesError.passwordError, { theme: "dark" })
+    credencialesError.nameError &&
+      toast.warn(credencialesError.nameError, { theme: "dark" })
+    setTimeout(() => {
+      if (
+        credencialesError.nameError ||
+        credencialesError.passwordError ||
+        credencialesError.emailError
+      ) {
+        setCredencialesError({
+          nameError: "",
+          emailError: "",
+          passwordError: "",
+        })
+      }
+    }, 6000)
+  }, [credencialesError])
+
   return (
     <div className="registerDesign">
       {!loadingFlag ? (
@@ -129,14 +154,9 @@ export const Register = ({
         {loadingFlag ? "Register succesfully" : "Register me!"}
       </div>
       <div className="footer">
-        {credencialesError.emailError && (
-          <div className="error">{credencialesError.emailError}</div>
-        )}
-        {credencialesError.passwordError && (
-          <div className="error">{credencialesError.passwordError}</div>
-        )}
         {msgError && <div className="error">{msgError}</div>}
       </div>
+      <ToastContainer />
     </div>
   )
 }
