@@ -25,7 +25,8 @@ export const Register = ({
     emailError: "",
     passwordError: "",
   })
-  const ERROR_MSG_TIME = 3000
+  const ERROR_MSG_TIME = 6000
+  const SUCCESS_MSG_TIME = 3000
 
   const navigate = useNavigate()
 
@@ -40,7 +41,6 @@ export const Register = ({
       ...prevState,
       [e.target.name + "Error"]: error,
     }))
-    console.log(credencialesError)
   }
 
   const inputHandler = (e) => {
@@ -53,28 +53,26 @@ export const Register = ({
   const regMe = async () => {
     for (let credencial in credenciales) {
       if (credenciales[credencial] === "") {
-        toast.warn("No has rellenado todos los campos")
-        setMsgError("No has rellenado todos los campos")
+        toast.error("No has rellenado todos los campos", { theme: "dark" })
         return
       }
     }
 
     const fetched = await registerMe(credenciales)
 
-    // if (fetched.success) {
-    //   // setTimeout(() => {
-    //   // setLoadingFlag(true)
-    //   //   navigate("/login")
-    //   // }, ERROR_MSG_TIME)
-    // }
-
     if (!fetched.success) {
-      setMsgError(fetched.message)
+      toast.error(fetched.message, { theme: "dark", position: "top-left" })
+
       return
+    }
+    if (fetched.success) {
+      toast.success(fetched.message, { theme: "dark" })
     }
     setCredential(credenciales)
     //Login redirected
-    navigate("/login")
+    setTimeout(() => {
+      navigate("/login")
+    }, SUCCESS_MSG_TIME)
   }
 
   useEffect(() => {
@@ -97,7 +95,7 @@ export const Register = ({
           passwordError: "",
         })
       }
-    }, 6000)
+    }, ERROR_MSG_TIME)
   }, [credencialesError])
 
   return (
@@ -142,21 +140,7 @@ export const Register = ({
       ) : (
         <Spinner />
       )}
-      <div
-        className="registerButton"
-        onClick={
-          regMe
-          //   ,
-          // () => {
-          //   setLoadingFlag(true)
-          // }
-        }
-      >
-        {loadingFlag ? "Register succesfully" : "Register me!"}
-      </div>
-      <div className="footer">
-        {msgError && <div className="error">{msgError}</div>}
-      </div>
+      <div className="registerButton" onClick={regMe}></div>
       <ToastContainer />
     </div>
   )

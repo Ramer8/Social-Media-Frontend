@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { decodeToken } from "react-jwt"
 import { CustomInput } from "../../common/CustomInput/CustomInput"
 
@@ -6,6 +6,9 @@ import "./Login.css"
 import { loginMe } from "../../services/apiCalls"
 import { useNavigate } from "react-router-dom"
 import { validame } from "../../utils/functions"
+
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 export const Login = ({
   msgError,
@@ -15,8 +18,6 @@ export const Login = ({
   usefullDataToken,
   setUsefullDataToken,
 }) => {
-  // const [msgError, setMsgError] = useState("")
-
   const [credenciales, setCredenciales] = useState({
     email: "",
     password: "",
@@ -27,7 +28,8 @@ export const Login = ({
     passwordError: "",
   })
 
-  const ERROR_MSG_TIME = 4000
+  const ERROR_MSG_TIME = 6000
+  const SUCCESS_MSG_TIME = 3000
 
   const navigate = useNavigate()
 
@@ -42,14 +44,8 @@ export const Login = ({
       ...prevState,
       [e.target.name + "Error"]: error,
     }))
-    console.log(credencialesError)
   }
 
-  // if (credential) {
-  //   credenciales.email = credential.email
-  //   credenciales.password = credential.password
-  // }
-  // const { name, ...newcredential } = credential
   const inputHandler = (e) => {
     setCredenciales((prevState) => ({
       ...prevState,
@@ -60,7 +56,11 @@ export const Login = ({
   const logMe = async () => {
     for (let credencial in credenciales) {
       if (credenciales[credencial] === "") {
-        setMsgError("No has rellenado todos los campos")
+        toast.error("No has rellenado todos los campos", {
+          theme: "dark",
+          position: "top-left",
+        })
+
         return
       }
     }
@@ -72,10 +72,14 @@ export const Login = ({
     }
 
     if (!fetched.success) {
-      setMsgError(fetched.message)
+      toast.error(fetched.message, { theme: "dark", position: "top-left" })
 
       return
     }
+    if (fetched.success) {
+      toast.success(fetched.message, { theme: "dark" })
+    }
+
     const decodificado = decodeToken(fetched.token)
     console.log(decodificado)
 
@@ -94,8 +98,25 @@ export const Login = ({
     })
 
     //Home redirected
-    navigate("/")
+    setTimeout(() => {
+      navigate("/home")
+    }, SUCCESS_MSG_TIME)
   }
+  useEffect(() => {
+    toast.dismiss() //clear all the messages
+    credencialesError.emailError &&
+      toast.warn(credencialesError.emailError, { theme: "dark" })
+    credencialesError.passwordError &&
+      toast.warn(credencialesError.passwordError, { theme: "dark" })
+    setTimeout(() => {
+      if (credencialesError.passwordError || credencialesError.emailError) {
+        setCredencialesError({
+          emailError: "",
+          passwordError: "",
+        })
+      }
+    }, ERROR_MSG_TIME)
+  }, [credencialesError])
 
   return (
     <div className="loginDesign">
@@ -126,16 +147,7 @@ export const Login = ({
       <div className="loginButton" onClick={logMe}>
         Log me!
       </div>
-
-      <div className="footer">
-        {credencialesError.emailError && (
-          <div className="error">{credencialesError.emailError}</div>
-        )}
-        {credencialesError.passwordError && (
-          <div className="error">{credencialesError.passwordError}</div>
-        )}
-        {msgError && <div className="error">{msgError}</div>}
-      </div>
+      <ToastContainer />
     </div>
   )
 }
