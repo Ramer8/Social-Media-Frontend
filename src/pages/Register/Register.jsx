@@ -78,6 +78,7 @@ export const Register = ({
   }
 
   useEffect(() => {
+    toast.dismiss()
     credencialesError.emailError &&
       toast.warn(credencialesError.emailError, { theme: "dark" })
     credencialesError.passwordError &&
