@@ -70,7 +70,6 @@ button:focus-visible {
   :root {
 
     color: black;
-    /* color: #8492a6; */
     background-color: #ffffff;
   }
 
@@ -89,6 +88,10 @@ button:focus-visible {
     color: #8492a6;
 
     background-color: #1b2836;
+  }
+
+  .primaryButton {
+    color: #1b2836
   }
 
   .navigateDesign {

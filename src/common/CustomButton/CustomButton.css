@@ -199,6 +199,10 @@
 }
 
 @media (prefers-color-scheme: light) {
+    .primaryButton {
+        color: whitesmoke;
+    }
+
     .icon {
         color: black;
         border: solid 1px black;
