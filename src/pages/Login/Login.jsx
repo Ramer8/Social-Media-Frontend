@@ -9,15 +9,9 @@ import { validame } from "../../utils/functions"
 
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { CustomButton } from "../../common/CustomButton/CustomButton"
 
-export const Login = ({
-  msgError,
-  setMsgError,
-  credential,
-  setCredential,
-  usefullDataToken,
-  setUsefullDataToken,
-}) => {
+export const Login = () => {
   const [credenciales, setCredenciales] = useState({
     email: "",
     password: "",
@@ -122,6 +116,7 @@ export const Login = ({
   return (
     <div className="loginDesign">
       {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
+      <label>Name:</label>
       <CustomInput
         className={`inputDesign ${
           credencialesError.emailError !== "" ? "inputDesignError" : ""
@@ -133,6 +128,7 @@ export const Login = ({
         functionChange={inputHandler}
         onBlurFunction={(e) => checkError(e)}
       />
+      <label>Password:</label>
       <CustomInput
         className={`inputDesign ${
           credencialesError.passwordError !== "" ? "inputDesignError" : ""
@@ -144,10 +140,11 @@ export const Login = ({
         functionChange={inputHandler}
         onBlurFunction={(e) => checkError(e)}
       />
-
-      <div className="loginButton" onClick={logMe}>
-        Log me!
-      </div>
+      <CustomButton
+        className={"primaryButton"}
+        title={"Log in"}
+        functionEmit={logMe}
+      />
       <ToastContainer />
     </div>
   )

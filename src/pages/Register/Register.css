@@ -9,31 +9,8 @@
 
 }
 
-.registerButton {
-
-    padding: .5rem 2rem;
-    height: 2.5em;
-    width: 15em;
-    margin: 1em;
-    text-transform: uppercase;
-    font-weight: 900;
-    font-size: medium;
-    background-color: fuchsia;
-    border-radius: 0.4em;
-    transition: 0.4s;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 10px 10px 60px grey;
-}
-
-.registerButton:hover {
-
-    cursor: pointer;
-    color: lightgrey;
-    transition: 0.3s;
-    box-shadow: 10px 10px 60px white;
+label {
+    color: #8492a6;
 }
 
 .error {

@@ -5,12 +5,7 @@ import { useNavigate } from "react-router-dom"
 import "./Home.css"
 // import Card from "../../common/Card/Card"
 
-export const Home = ({
-  // usefullDataToken,
-  // setUsefullDataToken,
-  msgError,
-  setMsgError,
-}) => {
+export const Home = () => {
   const [tokenStorage, setTokenStorage] = useState(
     JSON.parse(localStorage.getItem("decoded"))?.token
   )
@@ -50,7 +45,7 @@ export const Home = ({
         <div className="buttonProfile" onClick={goProfile}>
           go to profile
         </div>
-        <div>{msgError}</div>
+
         {dataToShow && (
           <>
             {/* <Card

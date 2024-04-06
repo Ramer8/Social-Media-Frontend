@@ -7,7 +7,8 @@ import Spinner from "../../common/Spinner/Spinner"
 import { validame } from "../../utils/functions"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-export const Register = ({ credential, setCredential }) => {
+import { CustomButton } from "../../common/CustomButton/CustomButton"
+export const Register = () => {
   const [loadingFlag, setLoadingFlag] = useState(false)
   const [credenciales, setCredenciales] = useState({
     name: "",
@@ -94,6 +95,7 @@ export const Register = ({ credential, setCredential }) => {
       {!loadingFlag ? (
         <div>
           {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
+          <label>Name:</label>
           <CustomInput
             className={`inputDesign ${
               credencialesError.nameError !== "" ? "inputDesignError" : ""
@@ -105,6 +107,7 @@ export const Register = ({ credential, setCredential }) => {
             functionChange={inputHandler}
             onBlurFunction={(e) => checkError(e)}
           />
+          <label>Email:</label>
           <CustomInput
             className={`inputDesign ${
               credencialesError.emailError !== "" ? "inputDesignError" : ""
@@ -116,6 +119,7 @@ export const Register = ({ credential, setCredential }) => {
             functionChange={inputHandler}
             onBlurFunction={(e) => checkError(e)}
           />
+          <label>Password:</label>
           <CustomInput
             className={`inputDesign ${
               credencialesError.passwordError !== "" ? "inputDesignError" : ""
@@ -131,7 +135,11 @@ export const Register = ({ credential, setCredential }) => {
       ) : (
         <Spinner />
       )}
-      <div className="registerButton" onClick={regMe}></div>
+      <CustomButton
+        className={"primaryButton"}
+        title={"Register"}
+        functionEmit={regMe}
+      />
       <ToastContainer />
     </div>
   )
