@@ -7,12 +7,7 @@ import Spinner from "../../common/Spinner/Spinner"
 import { validame } from "../../utils/functions"
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-export const Register = ({
-  msgError,
-  setMsgError,
-  credential,
-  setCredential,
-}) => {
+export const Register = ({ credential, setCredential }) => {
   const [loadingFlag, setLoadingFlag] = useState(false)
   const [credenciales, setCredenciales] = useState({
     name: "",
@@ -29,10 +24,6 @@ export const Register = ({
   const SUCCESS_MSG_TIME = 3000
 
   const navigate = useNavigate()
-
-  setTimeout(() => {
-    setMsgError("")
-  }, ERROR_MSG_TIME)
 
   const checkError = (e) => {
     const error = validame(e.target.name, e.target.value)
@@ -68,7 +59,7 @@ export const Register = ({
     if (fetched.success) {
       toast.success(fetched.message, { theme: "dark" })
     }
-    setCredential(credenciales)
+    // setCredential(credenciales)
     //Login redirected
     setTimeout(() => {
       navigate("/login")

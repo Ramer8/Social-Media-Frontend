@@ -1,0 +1,76 @@
+.profileDesign {
+    height: 88vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    font-size: 2em;
+
+}
+
+.boxProfile {
+    border-radius: .5em;
+    /* border: 1px solid gray; */
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rowName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rowLastName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rowEmail {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer {
+    height: 30vh;
+    width: 100vw;
+    gap: 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    justify-content: center;
+    color: white;
+    font-weight: 400;
+    width: max-content;
+    border-radius: 2em;
+    padding: 1em;
+}
+
+.success {
+    background-color: green;
+}
+
+h1 {
+    color: whitesmoke;
+    text-shadow: fuchsia 2px 0 20px;
+}

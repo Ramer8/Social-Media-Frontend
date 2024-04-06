@@ -33,10 +33,6 @@ export const Login = ({
 
   const navigate = useNavigate()
 
-  setTimeout(() => {
-    setMsgError("")
-  }, ERROR_MSG_TIME)
-
   const checkError = (e) => {
     const error = validame(e.target.name, e.target.value)
 
@@ -67,10 +63,6 @@ export const Login = ({
 
     const fetched = await loginMe(credenciales)
 
-    if (fetched.success) {
-      setCredential("")
-    }
-
     if (!fetched.success) {
       toast.error(fetched.message, { theme: "dark", position: "top-left" })
 
@@ -84,24 +76,33 @@ export const Login = ({
     console.log(decodificado)
 
     //ahora si funciona esta forma de guardar en localstorage
-    localStorage.setItem("decodificado", JSON.stringify(decodificado))
-    let a = JSON.parse(localStorage.getItem("decodificado"))
 
-    console.log(a)
+    // localStorage.setItem("decodificado", JSON.stringify(decodificado))
+    // let a = JSON.parse(localStorage.getItem("decodificado"))
 
-    sessionStorage.setItem("token", fetched)
-    sessionStorage.setItem("user", JSON.stringify(decodificado))
+    // console.log(a)
 
-    setUsefullDataToken({
+    // sessionStorage.setItem("token", fetched)
+    // sessionStorage.setItem("user", JSON.stringify(decodificado))
+
+    //se va por usar local storage y luego redux
+    // setUsefullDataToken({
+    //   tokenData: decodeToken(fetched.token),
+    //   token: fetched.token,
+    // })
+
+    const decoded = {
       tokenData: decodeToken(fetched.token),
       token: fetched.token,
-    })
+    }
+    localStorage.setItem("decoded", JSON.stringify(decoded))
 
     //Home redirected
     setTimeout(() => {
       navigate("/home")
     }, SUCCESS_MSG_TIME)
   }
+
   useEffect(() => {
     toast.dismiss() //clear all the messages
     credencialesError.emailError &&

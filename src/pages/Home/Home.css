@@ -1,12 +1,39 @@
 .homeDesign {
-    height: 84vh;
+    /* height: 84vh; */
+    height: auto;
     width: 100vw;
+    width: 100vw;
+
+    flex-direction: column;
 
     display: flex;
     justify-content: center;
     align-items: center;
+
     font-size: medium;
     font-weight: bolder;
     color: whitesmoke
-        /* background-color: whitesmoke; */
+}
+
+.homeBody {
+    height: 84vh;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonProfile {
+    cursor: pointer;
+    background-color: blue;
+    padding: .5em 1em;
+    border-radius: 1em;
+    transition: .4s;
+    margin: 1em;
+}
+
+.buttonProfile:hover {
+    opacity: .5;
 }
