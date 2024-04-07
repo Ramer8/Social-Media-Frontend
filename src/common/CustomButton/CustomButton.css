@@ -33,6 +33,18 @@
     box-shadow: 1px 1px 5px gray;
 }
 
+.likes {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: indianred;
+
+}
+
+.likes:hover {
+    color: red;
+}
+
 /* .registerButton {
 
     padding: .5rem 2rem;

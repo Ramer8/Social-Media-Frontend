@@ -103,6 +103,29 @@ export const updateProfile = async (data, token) => {
     return error
   }
 }
+export const getMyPosts = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/own`,
+      options
+    )
+
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}
 export const createPost = async (data, token) => {
   const options = {
     method: "POST",
@@ -125,6 +148,34 @@ export const createPost = async (data, token) => {
       throw new Error(data.message)
     }
 
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+export const putlikes = async (userId, token) => {
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    // body: JSON.stringify(data),
+    params: JSON.stringify(userId),
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/like/${userId}`,
+      options
+    )
+
+    const data = await response.json()
+
+    if (!data.success) {
+      throw new Error(data.message)
+    }
     return data
   } catch (error) {
     return error

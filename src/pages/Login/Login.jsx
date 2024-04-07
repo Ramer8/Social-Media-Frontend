@@ -26,7 +26,7 @@ export const Login = () => {
   })
 
   const ERROR_MSG_TIME = 6000
-  const SUCCESS_MSG_TIME = 3000
+  const SUCCESS_MSG_TIME = 1600
 
   const navigate = useNavigate()
 
@@ -68,7 +68,7 @@ export const Login = () => {
       return
     }
     if (fetched.success) {
-      toast.success(fetched.message, { theme: "dark" })
+      toast.success(fetched.message, { theme: "dark", autoClose: 1500 })
     }
 
     const decodificado = decodeToken(fetched.token)

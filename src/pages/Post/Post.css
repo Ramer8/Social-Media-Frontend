@@ -1,9 +1,62 @@
 .postDesign {
-    height: 88vh;
+    /* height: 88vh; */
     width: 100vw;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.myPostContainer {
+    border: 1px solid #ffffff40;
+    padding: 2em;
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.titlePostContainer {}
+
+.postList {
+    padding: 1em;
+}
+
+.post {
+    color: #9ea9b8;
+    font-weight: 500;
+    margin-top: 1em;
+    /* border: 1px solid #ffffff40; */
+    gap: .3em;
+    padding: 1em;
+    border-radius: .5em;
+
+    display: flex;
+    flex-direction: column;
+    background-color: whitesmoke;
+
+}
+
+.date {
+    color: black;
+    font-size: .8em;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.iconsInteraction {
+    font-size: .9em;
+    margin-inline: .5em;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.likesElements {
+    gap: .5em;
+    flex-direction: row;
+    display: flex;
+
 }
