@@ -26,7 +26,7 @@ export const Header = () => {
         {rdxUser?.credentials.token ? (
           <div className="menu">
             <CustomLink
-              title={"Profile"}
+              title={rdxUser?.credentials.tokenData.userName}
               destination="/profile"
               className={`${
                 location.pathname === "/profile" ? "menuHighlighted" : "menu"

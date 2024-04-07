@@ -17,6 +17,7 @@ import store from "./app/store.js"
 
 import { PersistGate } from "redux-persist/integration/react"
 import { persistStore } from "redux-persist"
+import Post from "./pages/Post/Post.jsx"
 
 const persistor = persistStore(store)
 
@@ -45,10 +46,10 @@ const router = createBrowserRouter([
         path: "/profile",
         element: <Profile />,
       },
-      // {
-      //   path: "/post",
-      //   element: <Services />,
-      // },
+      {
+        path: "/post",
+        element: <Post />,
+      },
       // {
       //   path: "/managment",
       //   element: <Managment />,

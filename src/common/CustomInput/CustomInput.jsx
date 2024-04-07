@@ -3,6 +3,7 @@ export const CustomInput = ({
   className,
   type,
   name,
+  disabled,
   value,
   placeholder,
   functionChange,
@@ -13,6 +14,7 @@ export const CustomInput = ({
       className={className}
       type={type}
       name={name}
+      disabled={disabled}
       value={value}
       placeholder={placeholder}
       onChange={functionChange}

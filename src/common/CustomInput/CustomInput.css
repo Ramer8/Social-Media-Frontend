@@ -26,3 +26,11 @@
 .inputDesignError {
     box-shadow: 1px 1px 25px red;
 }
+
+.inputBlock {
+    cursor: not-allowed;
+    opacity: 0.5;
+    box-shadow: 1.5px 1.5px 5px 0px rgba(255, 0, 238, 0.737);
+    box-shadow: 1.5px 1.5px 5px 0px grey;
+    color: black;
+}
