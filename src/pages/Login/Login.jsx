@@ -11,6 +11,9 @@ import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
 
+import { useDispatch } from "react-redux"
+import { login } from "../../app/slices/userSlice"
+
 export const Login = () => {
   const [credenciales, setCredenciales] = useState({
     email: "",
@@ -26,6 +29,8 @@ export const Login = () => {
   const SUCCESS_MSG_TIME = 3000
 
   const navigate = useNavigate()
+
+  const dispatch = useDispatch()
 
   const checkError = (e) => {
     const error = validame(e.target.name, e.target.value)
@@ -69,26 +74,13 @@ export const Login = () => {
     const decodificado = decodeToken(fetched.token)
     console.log(decodificado)
 
-    //ahora si funciona esta forma de guardar en localstorage
-
-    // localStorage.setItem("decodificado", JSON.stringify(decodificado))
-    // let a = JSON.parse(localStorage.getItem("decodificado"))
-
-    // console.log(a)
-
-    // sessionStorage.setItem("token", fetched)
-    // sessionStorage.setItem("user", JSON.stringify(decodificado))
-
-    //se va por usar local storage y luego redux
-    // setUsefullDataToken({
-    //   tokenData: decodeToken(fetched.token),
-    //   token: fetched.token,
-    // })
-
     const decoded = {
       tokenData: decodeToken(fetched.token),
       token: fetched.token,
     }
+
+    dispatch(login({ credentials: decoded }))
+
     localStorage.setItem("decoded", JSON.stringify(decoded))
 
     //Home redirected
