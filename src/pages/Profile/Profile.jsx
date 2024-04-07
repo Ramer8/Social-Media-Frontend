@@ -74,23 +74,22 @@ const Profile = ({ usefullDataToken }) => {
 
         if (!fetched?.success) {
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
+            console.log("primo pase x aqui")
+            dispatch(logout({ credentials: "" }))
             toast.error(fetched.message, {
               theme: "dark",
               position: "top-left",
             })
-
-            dispatch(logout({ credentials: "" }))
             navigate("/login")
           }
           if (!rdxUser.credentials.token === undefined) {
             throw new Error("Failed to fetch profile data")
           }
-          throw new Error(
-            toast.error(fetched.message, {
-              theme: "dark",
-              position: "top-left",
-            })
-          )
+          toast.error(fetched.message, {
+            theme: "dark",
+            position: "top-left",
+          })
+          throw new Error("Failed to fetch profile data")
         }
         setLoadedData(true)
         console.log(fetched.data.name)
@@ -127,7 +126,6 @@ const Profile = ({ usefullDataToken }) => {
   }
   useEffect(() => {
     toast.dismiss()
-
     userError.nameError && toast.warn(userError.nameError, { theme: "dark" })
     // setTimeout(() => {
     //   if (userError.nameError) {

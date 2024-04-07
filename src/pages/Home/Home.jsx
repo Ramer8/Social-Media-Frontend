@@ -9,7 +9,7 @@ export const Home = () => {
   const [tokenStorage, setTokenStorage] = useState(
     JSON.parse(localStorage.getItem("decoded"))?.token
   )
-  const [dataToShow, setDataToShow] = useState()
+  const [showProfile, setShowProfile] = useState()
 
   const navigate = useNavigate()
 
@@ -25,7 +25,7 @@ export const Home = () => {
           //  throw new Error("Failed to fetch profile data")
         }
         const data = await fetched
-        setDataToShow(data.data)
+        setShowProfile(data.data)
       } catch (error) {
         console.error(error)
       }
@@ -33,33 +33,34 @@ export const Home = () => {
 
     fetching()
   }, [tokenStorage]) // Execute useEffect whenever the token changes
-  console.log(dataToShow)
+  console.log(showProfile)
 
-  const goProfile = () => {
-    navigate("/profile")
-  }
   return (
     <div className="homeDesign">
       <div className="homeBody">
         <h1>Profile</h1>
-        <div className="buttonProfile" onClick={goProfile}>
+        <div className="buttonProfile" onClick={() => navigate("/profile")}>
           go to profile
         </div>
+        <div className="buttonProfile" onClick={() => navigate("/post")}>
+          go to post
+        </div>
 
-        {dataToShow && (
+        {showProfile && (
           <>
             {/* <Card
-            name={dataToShow?.name}
-            email={dataToShow.email}
-            id={dataToShow._id}
-            followers={dataToShow.followers}
-            following={dataToShow.following}
+            name={showProfile?.name}
+            email={showProfile.email}
+            id={showProfile._id}
+            followers={showProfile.followers}
+            following={showProfile.following}
+
             usefullDataToken={usefullDataToken}
             setUsefullDataToken={setUsefullDataToken}
           /> */}
           </>
         )}
-        <div>Copyright 2024 Social Net Ltd. </div>
+        <div>Copyright 2024 Social Site Ltd. </div>
       </div>
     </div>
   )
