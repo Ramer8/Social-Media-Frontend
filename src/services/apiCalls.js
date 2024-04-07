@@ -75,3 +75,58 @@ export const fetchMyProfile = async (token) => {
     return error
   }
 }
+
+export const updateProfile = async (data, token) => {
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users/profile`,
+      options
+    )
+
+    const data = await response.json()
+
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+
+    return data
+  } catch (error) {
+    return error
+  }
+}
+export const createPost = async (data, token) => {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts`,
+      options
+    )
+
+    const data = await response.json()
+
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+
+    return data
+  } catch (error) {
+    return error
+  }
+}

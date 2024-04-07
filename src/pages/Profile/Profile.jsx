@@ -1,32 +1,49 @@
 import { useNavigate } from "react-router-dom"
 import "./Profile.css"
-import { fetchMyProfile } from "../../services/apiCalls"
+import { fetchMyProfile, updateProfile } from "../../services/apiCalls"
 import { useEffect, useState } from "react"
-// import { CustomButton } from "../../common/CustomButton/CustomButton"
+
+import { ToastContainer, toast } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
+
 import { CustomInput } from "../../common/CustomInput/CustomInput"
+
+import { useDispatch, useSelector } from "react-redux"
+import { logout, userData } from "../../app/slices/userSlice"
+import { validame } from "../../utils/functions"
+import { CustomButton } from "../../common/CustomButton/CustomButton"
 
 const Profile = ({ usefullDataToken }) => {
   const [write, setWrite] = useState("disabled")
-  const [tokenStorage, setTokenStorage] = useState(
-    JSON.parse(localStorage.getItem("decoded"))?.token
-  )
+  // const [tokenStorage, setTokenStorage] = useState(
+  // JSON.parse(localStorage.getItem("decoded"))?.token
+  // )
   const [loadedData, setLoadedData] = useState(false)
   const [msgSuccess, setMsgSuccess] = useState("")
 
   const [user, setUser] = useState({
     name: "",
-    email: "",
   })
 
   const [userError, setUserError] = useState({
-    firstNameError: "",
-    lastNameError: "",
-    emailError: "",
+    nameError: "",
   })
+
+  const rdxUser = useSelector(userData)
+
+  const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
-  const SUCCESS_MSG_TIME = 8000
+  const ERROR_MSG_TIME = 6000
+  const SUCCESS_MSG_TIME = 3000
+
+  console.log("the credentials ", rdxUser?.credentials)
+  useEffect(() => {
+    if (!rdxUser.credentials.token) {
+      navigate("/")
+    }
+  }, [rdxUser])
 
   const inputHandler = (e) => {
     setUser((prevState) => ({
@@ -36,38 +53,49 @@ const Profile = ({ usefullDataToken }) => {
   }
 
   const checkError = (e) => {
-    //a gusto del consumidor....
+    const error = validame(e.target.name, e.target.value)
+
+    setUserError((prevState) => ({
+      ...prevState,
+      [e.target.name + "Error"]: error,
+    }))
   }
 
   useEffect(() => {
-    if (!tokenStorage) {
+    if (!rdxUser.credentials.token) {
       navigate("/")
     }
-  }, [tokenStorage])
+  }, [rdxUser])
 
   useEffect(() => {
     const fetching = async () => {
       try {
-        const fetched = await fetchMyProfile(tokenStorage)
+        const fetched = await fetchMyProfile(rdxUser.credentials.token)
 
         if (!fetched?.success) {
-          //  setMsgError(fetched.message)
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
-            console.log("token expired")
-            setTokenStorage("")
-            localStorage.removeItem("decoded")
+            toast.error(fetched.message, {
+              theme: "dark",
+              position: "top-left",
+            })
+
+            dispatch(logout({ credentials: "" }))
             navigate("/login")
           }
-          if (!usefullDataToken === undefined) {
+          if (!rdxUser.credentials.token === undefined) {
             throw new Error("Failed to fetch profile data")
           }
-          //  throw new Error("Failed to fetch profile data")
+          throw new Error(
+            toast.error(fetched.message, {
+              theme: "dark",
+              position: "top-left",
+            })
+          )
         }
         setLoadedData(true)
-        console.log(fetched.data.email)
+        console.log(fetched.data.name)
         setUser({
           name: fetched.data.name,
-          email: fetched.data.email,
         })
       } catch (error) {
         console.error(error)
@@ -76,27 +104,41 @@ const Profile = ({ usefullDataToken }) => {
     if (!loadedData) {
       fetching()
     }
-  }, [tokenStorage]) // Execute useEffect whenever the user changes
+  }, [rdxUser.credentials.token]) // Execute useEffect whenever the user changes
 
-  // const updateData = async () => {
-  //   try {
-  //     const fetched = await updateProfile(user, tokenStorage)
-  //     setUser({
-  //       firstName: fetched.firstNameUpdated,
-  //       lastName: fetched.lastNameUpdated,
-  //       email: fetched.emailUpdated,
-  //     })
-  //     setWrite("disabled")
+  const updateData = async () => {
+    console.log("antes del if", userError.name)
+    if (!userError.name) {
+      console.log("no hya error", userError.name)
+      try {
+        const fetched = await updateProfile(user, rdxUser.credentials.token)
+        setUser({
+          name: fetched.data.name,
+        })
+        setWrite("disabled")
+        console.log(fetched)
+        toast.success(fetched.message, { theme: "dark" })
+      } catch (error) {
+        console.log(error)
+      }
 
-  //     setMsgSuccess("Profile Udated")
+      return
+    }
+  }
+  useEffect(() => {
+    toast.dismiss()
 
-  //     setTimeout(() => {
-  //       setMsgSuccess("")
-  //     }, SUCCESS_MSG_TIME)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+    userError.nameError && toast.warn(userError.nameError, { theme: "dark" })
+    // setTimeout(() => {
+    //   if (userError.nameError) {
+    //     setUserError({
+    //       nameError: "",
+    //     })
+    //   }
+    // }, ERROR_MSG_TIME)
+  }, [userError])
+  console.log(userError.nameError !== "")
+  console.log(userError.nameError.length !== 0)
   return (
     <>
       <div className="profileDesign">
@@ -111,47 +153,30 @@ const Profile = ({ usefullDataToken }) => {
               <CustomInput
                 className={
                   `inputDesign ${
-                    userError.emailError !== "" ? "inputDesignError" : ""
+                    userError.nameError.length !== 0 ? "inputDesignError" : ""
                   }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
                 }
                 type={"text"}
                 placeholder={""}
-                name={"firstName"}
+                name={"name"}
                 disabled={write}
-                value={user.firstName || ""}
+                value={user.name || ""}
                 functionChange={(e) => inputHandler(e)}
                 onBlurFunction={(e) => checkError(e)}
               />
             </div>
 
-            <div className="rowEmail">
-              <label htmlFor="email">Email:</label>
-              <CustomInput
-                id="email"
+            {
+              <CustomButton
                 className={
-                  `inputDesign inputEmail ${
-                    userError.emailError !== "" ? "inputDesignError" : ""
-                  }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
+                  write === ""
+                    ? "primaryButton updateData"
+                    : "primaryButton editButton"
                 }
-                type={"email"}
-                placeholder={""}
-                name={"email"}
-                disabled={write}
-                value={user.email || ""}
-                functionChange={(e) => inputHandler(e)}
-                onBlurFunction={(e) => checkError(e)}
+                title={write === "" ? "Save" : "Edit"}
+                functionEmit={write === "" ? updateData : () => setWrite("")}
               />
-            </div>
-
-            {/* <CustomButton
-              className={
-                write === ""
-                  ? "loginButton updateData"
-                  : "loginButton editButton"
-              }
-              title={write === "" ? "Save" : "Edit"}
-              functionEmit={write === "" ? updateData : () => setWrite("")}
-            /> */}
+            }
           </div>
         )}
       </div>
@@ -164,6 +189,7 @@ const Profile = ({ usefullDataToken }) => {
           <div className="error">{userError.passwordBodyError}</div>
         )}
         {/* {msgError && <div className="error">{msgError}</div>} */}
+        <ToastContainer />
       </div>
     </>
   )
