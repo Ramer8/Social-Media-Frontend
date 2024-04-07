@@ -181,3 +181,56 @@ export const putlikes = async (userId, token) => {
     return error
   }
 }
+export const deletePost = async (id, token) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/${id}`,
+      options
+    )
+
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+export const updateMyPost = async (id, data, token) => {
+  const options = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(data),
+    params: JSON.stringify(id),
+  }
+
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts/${id}`,
+      options
+    )
+
+    const data = await response.json()
+
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}

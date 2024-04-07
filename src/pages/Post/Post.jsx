@@ -3,7 +3,13 @@ import { useNavigate } from "react-router-dom"
 
 import { useDispatch, useSelector } from "react-redux"
 import { userData } from "../../app/slices/userSlice"
-import { createPost, getMyPosts, putlikes } from "../../services/apiCalls"
+import {
+  createPost,
+  deletePost,
+  getMyPosts,
+  putlikes,
+  updateMyPost,
+} from "../../services/apiCalls"
 
 import "./Post.css"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
@@ -48,8 +54,6 @@ const Post = () => {
     }
     fetching()
   }, [postChanged])
-
-  console.log(myPosts)
   const inputHandler = (e) => {
     console.log(e.target.value)
     setNewPost((prevState) => ({
@@ -96,6 +100,46 @@ const Post = () => {
       console.log(error)
     }
   }
+  const deleteMyPost = async (id) => {
+    console.log(id)
+    console.log(newPost)
+    try {
+      const fetched = await deletePost(id, rdxUser.credentials.token)
+      console.log(fetched)
+      if (!fetched?.success) {
+        if (!rdxUser.credentials.token === undefined) {
+          throw new Error("Failed to fetch Appointment data")
+        }
+      }
+      if (fetched?.success) {
+        toast.warn(fetched.message, { theme: "dark" })
+      }
+      setPostChanged(!postChanged)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const editMyPost = async (id) => {
+    console.log(id)
+    console.log(newPost)
+    try {
+      const fetched = await updateMyPost(id, newPost, rdxUser.credentials.token)
+      console.log(fetched)
+      if (!fetched?.success) {
+        if (!rdxUser.credentials.token === undefined) {
+          throw new Error("Failed to fetch Appointment data")
+        }
+      }
+      if (fetched?.success) {
+        toast.warn(fetched.message, { theme: "dark" })
+      }
+      setPostChanged(!postChanged)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
   return (
     <div>
       <>
@@ -139,6 +183,11 @@ const Post = () => {
                       ></CustomButton>{" "}
                       {element.likes.length}
                     </div>
+                    <CustomButton
+                      className={"primaryButton"}
+                      title={"Delete Post"}
+                      functionEmit={() => deleteMyPost(element._id)}
+                    />
                     <div className="comments">
                       <CustomButton
                         className="message"
@@ -157,6 +206,22 @@ const Post = () => {
                             0
                           </>
                         }
+                      />
+                      <label className="labelTextArea">Edit your post</label>
+                      <CustomInputTextArea
+                        className=" textarea "
+                        type={"text"}
+                        name={"content"} //must be the key name idem like state newPost
+                        disabled={""}
+                        value={newPost.content || ""}
+                        placeholder="write your post...."
+                        functionChange={(e) => inputHandler(e)}
+                        // onBlurFunction={(e) => checkError(e)}
+                      />
+                      <CustomButton
+                        className={"primaryButton"}
+                        title={"Edit Post"}
+                        functionEmit={() => editMyPost(element._id)}
                       />
                     </div>
                   </div>
