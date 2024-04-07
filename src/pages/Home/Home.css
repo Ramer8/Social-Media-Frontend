@@ -10,21 +10,88 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
-    font-size: medium;
-    font-weight: bolder;
-
 }
 
-.homeBody {
-    height: 84vh;
-    width: 100vw;
+.boxContainer {
+    /* height: 100vh;
+    width: 100vw; */
+    padding: 2em;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    border: 1px solid #ffffff40;
+    /* padding-inline: .5em; */
+    border-radius: .5em;
+    gap: .5em;
 }
+
+
+.title {
+    flex: 1;
+    /* Take up equal space */
+    cursor: pointer;
+    text-align: center;
+    padding: 1em;
+    /* border-top-left-radius: .5em; */
+}
+
+.title:hover {
+    opacity: .5;
+    /* Change background color on hover */
+}
+
+.title.active {
+    background-color: #386cf0;
+    color: #f8f9fa;
+    /* Change background color when active */
+}
+
+
+.headerContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* align-items: center; */
+    font-size: 1em;
+    font-weight: 400;
+    color: black;
+
+    background-color: #f8f9fa;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+
+}
+
+.leftSide .title {
+    display: flex;
+    flex-direction: column;
+    border-top-left-radius: .5em;
+
+    background-color: #386cf0;
+    width: 50%;
+}
+
+
+.rightSide .title {
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: .5em;
+}
+
+
+.homefooter {
+    height: 5vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: .8em;
+}
+
 
 .buttonProfile {
     cursor: pointer;
