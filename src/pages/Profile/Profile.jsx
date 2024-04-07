@@ -13,11 +13,9 @@ import { logout, userData } from "../../app/slices/userSlice"
 import { validame } from "../../utils/functions"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
 
-const Profile = ({ usefullDataToken }) => {
+const Profile = () => {
   const [write, setWrite] = useState("disabled")
-  // const [tokenStorage, setTokenStorage] = useState(
-  // JSON.parse(localStorage.getItem("decoded"))?.token
-  // )
+
   const [loadedData, setLoadedData] = useState(false)
   const [msgSuccess, setMsgSuccess] = useState("")
 
@@ -74,7 +72,6 @@ const Profile = ({ usefullDataToken }) => {
 
         if (!fetched?.success) {
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
-            console.log("primo pase x aqui")
             dispatch(logout({ credentials: "" }))
             toast.error(fetched.message, {
               theme: "dark",
@@ -186,7 +183,6 @@ const Profile = ({ usefullDataToken }) => {
         {userError.passwordBodyError && (
           <div className="error">{userError.passwordBodyError}</div>
         )}
-        {/* {msgError && <div className="error">{msgError}</div>} */}
         <ToastContainer />
       </div>
     </>
