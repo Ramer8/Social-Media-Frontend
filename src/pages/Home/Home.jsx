@@ -41,6 +41,7 @@ export const Home = () => {
     setActive(!active)
     console.log(active)
   }
+
   return (
     <div className="homeDesign">
       <div className="boxContainer">
@@ -82,11 +83,16 @@ export const Home = () => {
             Setting
           </div>
         </div>
-        <div className="bodyProfile">
-          <Post />
-        </div>
-
-        <div className="bodyProfileSetting">{/* <Profile /> */}</div>
+        {active && (
+          <div className="bodyProfile">
+            <Post />
+          </div>
+        )}
+        {!active && (
+          <div className="bodyProfileSetting">
+            <Profile />
+          </div>
+        )}
       </div>
 
       <div className="homefooter">

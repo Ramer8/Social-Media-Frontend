@@ -20,7 +20,8 @@
     align-items: center;
 
     border: 1px solid #ffffff40;
-    /* padding-inline: .5em; */
+    /* luego quitar el borde */
+
     border-radius: .5em;
     gap: .5em;
 
@@ -105,3 +106,5 @@
 .buttonProfile:hover {
     opacity: .5;
 }
+
+.bodyProfile {}

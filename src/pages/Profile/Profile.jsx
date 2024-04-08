@@ -137,8 +137,6 @@ const Profile = () => {
   return (
     <>
       <div className="profileDesign">
-        <div className="title">Profile Page</div>
-
         {!loadedData ? (
           <div>CARGANDO</div>
         ) : (
@@ -160,22 +158,20 @@ const Profile = () => {
                 onBlurFunction={(e) => checkError(e)}
               />
             </div>
-
-            {
-              <CustomButton
-                className={
-                  write === ""
-                    ? "primaryButton updateData"
-                    : "primaryButton editButton"
-                }
-                title={write === "" ? "Save" : "Edit"}
-                functionEmit={write === "" ? updateData : () => setWrite("")}
-              />
-            }
+            <CustomButton
+              className={
+                write === ""
+                  ? "primaryButton updateData"
+                  : "primaryButton editButton"
+              }
+              title={write === "" ? "Save" : "Edit"}
+              functionEmit={write === "" ? updateData : () => setWrite("")}
+            />
           </div>
         )}
       </div>
-      <div className="footer">
+      <ToastContainer />
+      {/* <div className="footer">
         {msgSuccess && <div className="error success">{msgSuccess}</div>}
         {userError.emailError && (
           <div className="error">{userError.emailError}</div>
@@ -183,8 +179,7 @@ const Profile = () => {
         {userError.passwordBodyError && (
           <div className="error">{userError.passwordBodyError}</div>
         )}
-        <ToastContainer />
-      </div>
+      </div> */}
     </>
   )
 }
