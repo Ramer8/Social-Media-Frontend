@@ -1,6 +1,14 @@
-.postDesign {
-    /* height: 88vh; */
+/* .postDesign {
+    height: 88vh;
     width: 100vw;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+} */
+
+.myPostContainer {
 
     display: flex;
     flex-direction: column;
@@ -8,21 +16,27 @@
     align-items: center;
 }
 
-.myPostContainer {
-    border: 1px solid #ffffff40;
-    padding: 2em;
-
+.titlePostContainer {
     display: flex;
-    flex-direction: column;
-
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
+.leftSide {
+    margin: 1em;
+    font-weight: 600;
+    font-size: 1.3em;
+}
 
 .postList {
-    padding: 1em;
+    width: 100%;
+    /* padding: 1em; */
 }
 
 .post {
+    /* max-width: 30em; */
     color: #9ea9b8;
     font-weight: 500;
     margin-top: 1em;
@@ -61,21 +75,21 @@
 }
 
 .newPost {
-    margin: .5em .1em;
+    /* margin: .5em .1em; */
     /* border: 1px solid #ffffff40; */
+    width: 100%;
     border-radius: 1em;
     padding: .5em .2em;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
 .modalButtons {
-    /* background-color: blue; */
     display: flex;
     justify-content: center;
-    /* max-width: max-content; */
+    width: 100%;
     color: whitesmoke;
-    max-width: 100%;
 
 }

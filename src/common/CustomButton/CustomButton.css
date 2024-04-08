@@ -167,8 +167,8 @@
 
 .sendModalButton {
     font-size: 1em;
-    /* padding: max-content; */
-    padding: .5em 4em;
+    width: 100%;
+    padding: .5em 2em;
     display: flex;
     border-bottom-right-radius: 1em;
 
@@ -182,13 +182,15 @@
 .sendModalButton:hover {
     cursor: pointer;
     color: green;
-    border: .1px green solid;
+    /* border: .1px green solid; */
     background-color: transparent;
 }
 
 .cancelModalButton {
     font-size: 1em;
-    padding: .5em 4em;
+    width: 100%;
+    padding: .5em 2em;
+    /* padding: .5em 4em; */
     display: flex;
     border-bottom-left-radius: 1em;
     justify-content: center;
@@ -219,18 +221,17 @@
     font-size: large;
 }
 
-.addAppointment {
+.addPost {
+    margin: 1em;
     display: flex;
-    justify-content: right;
-    align-items: flex-end;
     background-color: none;
     cursor: pointer;
     transition: 0.4s;
 }
 
-.addAppointment:hover {
+.addPost:hover {
     cursor: pointer;
-    color: deeppink;
+    color: #396cf0;
 }
 
 @media (prefers-color-scheme: light) {

@@ -3,7 +3,6 @@
     height: 90vh;
     /* height: auto; */
     width: 100vw;
-    width: 100vw;
 
     flex-direction: column;
 
@@ -13,10 +12,8 @@
 }
 
 .boxContainer {
-    /* height: 100vh;
-    width: 100vw; */
-    padding: 2em;
 
+    /* width: 50%;  when create the other profile box with pic active this line!*/
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -26,6 +23,8 @@
     /* padding-inline: .5em; */
     border-radius: .5em;
     gap: .5em;
+
+
 }
 
 
@@ -46,11 +45,13 @@
 .title.active {
     background-color: #386cf0;
     color: #f8f9fa;
+
     /* Change background color when active */
 }
 
 
 .headerContainer {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -62,7 +63,6 @@
     background-color: #f8f9fa;
     border-top-left-radius: .5em;
     border-top-right-radius: .5em;
-
 }
 
 .leftSide .title {

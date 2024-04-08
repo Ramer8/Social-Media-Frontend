@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 import "./Home.css"
 import Profile from "../Profile/Profile"
+import Post from "../Post/Post"
 // import Card from "../../common/Card/Card"
 
 export const Home = () => {
@@ -81,7 +82,10 @@ export const Home = () => {
             Setting
           </div>
         </div>
-        <div className="bodyProfile">my posts..</div>
+        <div className="bodyProfile">
+          <Post />
+        </div>
+
         <div className="bodyProfileSetting">{/* <Profile /> */}</div>
       </div>
 
