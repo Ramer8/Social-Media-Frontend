@@ -35,6 +35,7 @@
 
 .post {
     /* max-width: 30em; */
+    width: 100%;
     color: #9ea9b8;
     font-weight: 500;
     margin-bottom: .5em;
@@ -90,4 +91,28 @@
     width: 100%;
     color: whitesmoke;
 
+}
+
+/*** SWIPE LIST OVERRIDES **/
+.swipe-action__leading {
+    background-color: blue;
+    color: whitesmoke;
+    margin-bottom: .5rem;
+    border-radius: .2em;
+}
+
+.swipe-action__trailing {
+    background-color: red;
+    margin-bottom: .5rem;
+    border-radius: .2em;
+    color: whitesmoke;
+}
+
+.swipeable-list .swipe-action {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    text-align: right;
 }

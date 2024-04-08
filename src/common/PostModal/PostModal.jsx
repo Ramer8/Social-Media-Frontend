@@ -11,26 +11,26 @@ const PostModal = ({
   setPostChanged,
   editMyPost,
   inputHandler,
+  modalIsOpen,
+  setModalIsOpen,
 }) => {
-  const [modalIsOpen, setIsOpen] = useState(false)
-
   Modal.setAppElement("#root")
 
-  function openModal() {
-    setIsOpen(true)
-  }
+  //   function openModal() {
+  //     setModalIsOpen(true)
+  //   }
 
   function closeModal() {
-    setIsOpen(false)
+    setModalIsOpen(false)
   }
   console.log(thePost._id)
   return (
     <div className="postModalContainter">
-      <CustomButton
+      {/* <CustomButton
         className={" addAppointment"}
         title={"Edit Post"}
         functionEmit={openModal}
-      />
+      /> */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
