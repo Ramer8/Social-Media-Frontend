@@ -17,7 +17,6 @@
 
 }
 
-.titlePostContainer {}
 
 .postList {
     padding: 1em;
@@ -58,5 +57,25 @@
     gap: .5em;
     flex-direction: row;
     display: flex;
+
+}
+
+.newPost {
+    margin: .5em .1em;
+    /* border: 1px solid #ffffff40; */
+    border-radius: 1em;
+    padding: .5em .2em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modalButtons {
+    /* background-color: blue; */
+    display: flex;
+    justify-content: center;
+    /* max-width: max-content; */
+    color: whitesmoke;
+    max-width: 100%;
 
 }
