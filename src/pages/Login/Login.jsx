@@ -61,7 +61,6 @@ export const Login = () => {
     }
 
     const fetched = await loginMe(credenciales)
-
     if (!fetched.success) {
       toast.error(fetched.message, { theme: "dark", position: "top-left" })
 
@@ -71,9 +70,6 @@ export const Login = () => {
       toast.success(fetched.message, { theme: "dark", autoClose: 1500 })
     }
 
-    const decodificado = decodeToken(fetched.token)
-    console.log(decodificado)
-
     const decoded = {
       tokenData: decodeToken(fetched.token),
       token: fetched.token,
@@ -81,12 +77,15 @@ export const Login = () => {
 
     dispatch(login({ credentials: decoded }))
 
-    localStorage.setItem("decoded", JSON.stringify(decoded))
+    if (decoded.tokenData.roleName === "super_admin") {
+      navigate("/managment")
+      return
+    }
 
     //Home redirected
-    setTimeout(() => {
-      navigate("/home")
-    }, SUCCESS_MSG_TIME)
+    // setTimeout(() => {
+    //   navigate("/home")
+    // }, SUCCESS_MSG_TIME)
   }
 
   useEffect(() => {
