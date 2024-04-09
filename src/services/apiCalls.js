@@ -234,3 +234,52 @@ export const updateMyPost = async (id, data, token) => {
     return error
   }
 }
+
+export const fetchAllUsers = async (token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users`,
+      options
+    )
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}
+// export const deleteMoreThanOneUsers = async (array, token) => {
+//   const options = {
+//     method: "DELETE",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify(array),
+//   }
+
+//   try {
+//     const response = await fetch(
+//       `${import.meta.env.VITE_API_URL}/users`,
+//       options
+//     )
+
+//     const data = await response.json()
+//     if (!data.success) {
+//       throw new Error(data.message)
+//     }
+
+//     return data
+//   } catch (error) {
+//     return error
+//   }
+// }

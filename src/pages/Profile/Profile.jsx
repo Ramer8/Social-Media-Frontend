@@ -36,7 +36,7 @@ const Profile = () => {
   const ERROR_MSG_TIME = 6000
   const SUCCESS_MSG_TIME = 3000
 
-  console.log("the credentials ", rdxUser?.credentials)
+  // console.log("the credentials ", rdxUser?.credentials)
   useEffect(() => {
     if (!rdxUser.credentials.token) {
       navigate("/")
@@ -89,7 +89,7 @@ const Profile = () => {
           throw new Error("Failed to fetch profile data")
         }
         setLoadedData(true)
-        console.log(fetched.data.name)
+        // console.log(fetched.data.name)
         setUser({
           name: fetched.data.name,
         })
@@ -103,16 +103,16 @@ const Profile = () => {
   }, [rdxUser.credentials.token]) // Execute useEffect whenever the user changes
 
   const updateData = async () => {
-    console.log("antes del if", userError.name)
+    // console.log("antes del if", userError.name)
     if (!userError.name) {
-      console.log("no hya error", userError.name)
+      // console.log("no hya error", userError.name)
       try {
         const fetched = await updateProfile(user, rdxUser.credentials.token)
         setUser({
           name: fetched.data.name,
         })
         setWrite("disabled")
-        console.log(fetched)
+        // console.log(fetched)
         toast.success(fetched.message, { theme: "dark" })
       } catch (error) {
         console.log(error)
@@ -132,8 +132,8 @@ const Profile = () => {
     //   }
     // }, ERROR_MSG_TIME)
   }, [userError])
-  console.log(userError.nameError !== "")
-  console.log(userError.nameError.length !== 0)
+  // console.log(userError.nameError !== "")
+  // console.log(userError.nameError.length !== 0)
   return (
     <>
       <div className="profileDesign">

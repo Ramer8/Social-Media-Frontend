@@ -56,7 +56,13 @@ const PostElement = ({
               {/* poner algoritmo q diga q si es otro año lo ponga sino vacio */}
               {/* puedo hacer lo mismo con post de hoy o de ayer */}
             </div>
-            <div className="postContent">{content}</div>
+            <div
+              className="postContent"
+              onClick={() => console.log(element._id)} // hacer funcion para mostrar cita
+              //traer todas las citas de los usuarios.
+            >
+              {content}
+            </div>
             <PostModal
               thePost={element}
               newPost={newPost}

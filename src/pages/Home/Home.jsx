@@ -93,7 +93,7 @@ export const Home = () => {
       </div>
 
       <div className="homefooter">
-        <div>Copyright 2024 Social Site Ltd. </div>
+        <div>Copyright 2024 Social Site Ltd. All Right Reserved. </div>
       </div>
     </div>
   )

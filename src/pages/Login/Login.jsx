@@ -77,15 +77,16 @@ export const Login = () => {
 
     dispatch(login({ credentials: decoded }))
 
+    // Go to SuperAdmin Managment
     if (decoded.tokenData.roleName === "super_admin") {
       navigate("/managment")
       return
     }
 
-    //Home redirected
-    // setTimeout(() => {
-    //   navigate("/home")
-    // }, SUCCESS_MSG_TIME)
+    // Home redirected
+    setTimeout(() => {
+      navigate("/home")
+    }, SUCCESS_MSG_TIME)
   }
 
   useEffect(() => {

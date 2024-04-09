@@ -88,7 +88,6 @@ const Post = () => {
   const likesPost = async (id) => {
     try {
       const fetched = await putlikes(id, rdxUser.credentials.token)
-      console.log(fetched)
       if (!fetched?.success) {
         toast.error(fetched.message, { theme: "dark" })
       }
