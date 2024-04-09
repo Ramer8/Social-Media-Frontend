@@ -18,14 +18,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
-    border: 1px solid #ffffff40;
-    /* luego quitar el borde */
-
     border-radius: .5em;
-    gap: .5em;
-
-
+    /* border: 1px solid #ffffff40; */
+    /* luego quitar el borde o agregar para ver con otro objeto */
 }
 
 
@@ -49,7 +44,6 @@
 
     /* Change background color when active */
 }
-
 
 .headerContainer {
     width: 100%;

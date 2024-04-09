@@ -3,16 +3,16 @@
     text-align: left;
 }
 
-/* .textareaEditPost {
-    width: 100%;
-} */
+.textareaEditPost {
+    border-top-right-radius: .5em;
+    border-top-left-radius: .5em;
+}
 
 .textareaNewPost {
-    /* luego poner en un box y poner ancho max width */
 
     padding: .5rem 1rem;
-    height: 4em;
-    max-width: 100%;
+    height: 6em;
+    min-width: 100%;
 
     outline: none;
     font-family: "Inter", sans-serif;
@@ -22,13 +22,17 @@
     text-align: left;
     border: none;
     /* border: 1px solid #e9ecef; */
-    border-top-right-radius: .5em;
-    border-top-left-radius: .5em;
+
     /* color: #212529;
     background: whitesmoke; */
-
     overflow-wrap: break-word;
-    /* padding: 1em; */
+    padding: 1em;
+}
+
+@media(min-width: 500px) {
+    .textareaNewPost {
+        min-height: 3em
+    }
 }
 
 textarea::placeholder {
