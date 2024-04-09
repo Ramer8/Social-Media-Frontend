@@ -17,7 +17,6 @@ const Profile = () => {
   const [write, setWrite] = useState("disabled")
 
   const [loadedData, setLoadedData] = useState(false)
-  const [msgSuccess, setMsgSuccess] = useState("")
 
   const [user, setUser] = useState({
     name: "",
@@ -36,7 +35,6 @@ const Profile = () => {
   const ERROR_MSG_TIME = 6000
   const SUCCESS_MSG_TIME = 3000
 
-  // console.log("the credentials ", rdxUser?.credentials)
   useEffect(() => {
     if (!rdxUser.credentials.token) {
       navigate("/")
@@ -61,7 +59,7 @@ const Profile = () => {
 
   useEffect(() => {
     if (!rdxUser.credentials.token) {
-      navigate("/")
+      navigate("/login")
     }
   }, [rdxUser])
 
@@ -73,23 +71,20 @@ const Profile = () => {
         if (!fetched?.success) {
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
             dispatch(logout({ credentials: "" }))
+
             toast.error(fetched.message, {
               theme: "dark",
               position: "top-left",
             })
-            navigate("/login")
-          }
-          if (!rdxUser.credentials.token === undefined) {
-            throw new Error("Failed to fetch profile data")
           }
           toast.error(fetched.message, {
             theme: "dark",
             position: "top-left",
           })
+          navigate("/login")
           throw new Error("Failed to fetch profile data")
         }
         setLoadedData(true)
-        // console.log(fetched.data.name)
         setUser({
           name: fetched.data.name,
         })
@@ -100,19 +95,16 @@ const Profile = () => {
     if (!loadedData) {
       fetching()
     }
-  }, [rdxUser.credentials.token]) // Execute useEffect whenever the user changes
+  }, []) // Execute useEffect whenever the user changes
 
   const updateData = async () => {
-    // console.log("antes del if", userError.name)
     if (!userError.name) {
-      // console.log("no hya error", userError.name)
       try {
         const fetched = await updateProfile(user, rdxUser.credentials.token)
         setUser({
           name: fetched.data.name,
         })
         setWrite("disabled")
-        // console.log(fetched)
         toast.success(fetched.message, { theme: "dark" })
       } catch (error) {
         console.log(error)
@@ -124,16 +116,8 @@ const Profile = () => {
   useEffect(() => {
     toast.dismiss()
     userError.nameError && toast.warn(userError.nameError, { theme: "dark" })
-    // setTimeout(() => {
-    //   if (userError.nameError) {
-    //     setUserError({
-    //       nameError: "",
-    //     })
-    //   }
-    // }, ERROR_MSG_TIME)
   }, [userError])
-  // console.log(userError.nameError !== "")
-  // console.log(userError.nameError.length !== 0)
+
   return (
     <>
       <div className="profileDesign">
@@ -171,15 +155,6 @@ const Profile = () => {
         )}
       </div>
       <ToastContainer />
-      {/* <div className="footer">
-        {msgSuccess && <div className="error success">{msgSuccess}</div>}
-        {userError.emailError && (
-          <div className="error">{userError.emailError}</div>
-        )}
-        {userError.passwordBodyError && (
-          <div className="error">{userError.passwordBodyError}</div>
-        )}
-      </div> */}
     </>
   )
 }
