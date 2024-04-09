@@ -36,10 +36,8 @@ export const Home = () => {
 
     fetching()
   }, [tokenStorage]) // Execute useEffect whenever the token changes
-  console.log(showProfile)
   const changeBackground = () => {
     setActive(!active)
-    console.log(active)
   }
 
   return (
@@ -100,27 +98,3 @@ export const Home = () => {
     </div>
   )
 }
-
-// ;<div className="oldbuttons">
-//   <h1>Profile</h1>
-//   <div className="buttonProfile" onClick={() => navigate("/profile")}>
-//     go to profile
-//   </div>
-//   <div className="buttonProfile" onClick={() => navigate("/post")}>
-//     go to post
-//   </div>
-//   {showProfile && (
-//     <>
-//       <Card
-//             name={showProfile?.name}
-//             email={showProfile.email}
-//             id={showProfile._id}
-//             followers={showProfile.followers}
-//             following={showProfile.following}
-
-//             usefullDataToken={usefullDataToken}
-//             setUsefullDataToken={setUsefullDataToken}
-//           />
-//     </>
-//   )}
-// </div>

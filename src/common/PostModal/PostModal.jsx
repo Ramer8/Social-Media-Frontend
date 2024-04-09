@@ -1,4 +1,3 @@
-import { useState } from "react"
 import Modal from "react-modal"
 import "./PostModal.css"
 import { CustomButton } from "../CustomButton/CustomButton"
@@ -6,9 +5,6 @@ import { CustomInputTextArea } from "../CustomInputTextArea/CustomInputTextArea"
 const PostModal = ({
   thePost,
   newPost,
-  setNewPost,
-  postChanged,
-  setPostChanged,
   editMyPost,
   inputHandler,
   modalIsOpen,
@@ -23,14 +19,12 @@ const PostModal = ({
   function closeModal() {
     setModalIsOpen(false)
   }
-  console.log(thePost._id)
+  const preEditMyPost = (id) => {
+    editMyPost(id)
+    closeModal()
+  }
   return (
     <div className="postModalContainter">
-      {/* <CustomButton
-        className={" addAppointment"}
-        title={"Edit Post"}
-        functionEmit={openModal}
-      /> */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
@@ -57,20 +51,50 @@ const PostModal = ({
         <div className="bodyPostModal">
           <label className="labelTextArea">Edit your post</label>
           <CustomInputTextArea
-            className=" textarea "
+            className="textareaNewPost textareaEditPost"
             type={"text"}
             name={"content"} //must be the key name idem like state newPost
             disabled={""}
-            value={newPost.content || ""}
+            value={newPost.content || thePost.content || ""}
             placeholder="write your post...."
             functionChange={(e) => inputHandler(e)}
             // onBlurFunction={(e) => checkError(e)}
           />
-          <CustomButton
-            className={"primaryButton"}
-            title={"Edit Post"}
-            functionEmit={() => editMyPost(thePost._id)}
-          />
+          <div className="modalButtons">
+            <CustomButton
+              className={"cancelModalButton"}
+              title={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-x-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg>
+              }
+              functionEmit={closeModal}
+            />
+            <CustomButton
+              className={"sendModalButton"}
+              title={
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-upload"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5" />
+                  <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z" />
+                </svg>
+              }
+              functionEmit={() => preEditMyPost(thePost._id)}
+            />
+          </div>
         </div>
       </Modal>
     </div>
