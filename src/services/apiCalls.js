@@ -103,7 +103,7 @@ export const updateProfile = async (data, token) => {
     return error
   }
 }
-export const getMyPosts = async (token) => {
+export const getAllUsersPosts = async (token) => {
   const options = {
     method: "GET",
     headers: {
@@ -113,7 +113,7 @@ export const getMyPosts = async (token) => {
   }
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/posts/own`,
+      `${import.meta.env.VITE_API_URL}/posts/`,
       options
     )
 
@@ -126,6 +126,30 @@ export const getMyPosts = async (token) => {
     return error
   }
 }
+//Changed for previous function..
+// export const getMyPosts = async (token) => {
+//   const options = {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }
+//   try {
+//     const response = await fetch(
+//       `${import.meta.env.VITE_API_URL}/posts/own`,
+//       options
+//     )
+
+//     const data = await response.json()
+//     if (!data.success) {
+//       throw new Error(data.message)
+//     }
+//     return data
+//   } catch (error) {
+//     return error
+//   }
+// }
 export const createPost = async (data, token) => {
   const options = {
     method: "POST",

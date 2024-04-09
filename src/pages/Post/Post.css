@@ -50,7 +50,24 @@
 
 }
 
-@media (prefers-color-scheme: light) {}
+.headerPost {
+    /* background-color: red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.postOwner {
+    color: dimgray;
+}
+
+@media (prefers-color-scheme: light) {
+    .postOwner {
+        color: dimgray;
+    }
+}
+
+@media (prefers-color-scheme: dark) {}
 
 .date {
     color: black;

@@ -56,6 +56,12 @@
     display: table-row;
 }
 
+.idUser {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: scroll;
+}
+
 
 .header>div,
 .row>div {

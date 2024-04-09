@@ -6,7 +6,8 @@ import { userData } from "../../app/slices/userSlice"
 import {
   createPost,
   deletePost,
-  getMyPosts,
+  getAllUsersPosts,
+  // getMyPosts,
   putlikes,
   updateMyPost,
 } from "../../services/apiCalls"
@@ -41,7 +42,10 @@ const Post = () => {
   useEffect(() => {
     const fetching = async () => {
       try {
-        const fetched = await getMyPosts(rdxUser.credentials.token)
+        const fetched = await getAllUsersPosts(rdxUser.credentials.token)
+        // const fetched = await getMyPosts(rdxUser.credentials.token)
+        // add function delete and edit to not avoid delete other users post.
+        // and put if the post its yours put "you" instead of the your name
         if (!fetched?.success) {
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED")
             navigate("/login")

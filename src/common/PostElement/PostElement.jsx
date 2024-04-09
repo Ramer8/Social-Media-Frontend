@@ -19,8 +19,8 @@ const PostElement = ({
   inputHandler,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const { createdAt, _id, content, likes, userId } = element
 
-  const { createdAt, _id, content, likes } = element
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction onClick={() => setModalIsOpen(true)}>Edit</SwipeAction>
@@ -51,10 +51,13 @@ const PostElement = ({
           trailingActions={trailingActions()}
         >
           <div className="post" key={_id}>
-            <div className="date">
-              {new Date(createdAt).toDateString().replace("2024", " ")}
-              {/* poner algoritmo q diga q si es otro año lo ponga sino vacio */}
-              {/* puedo hacer lo mismo con post de hoy o de ayer */}
+            <div className="headerPost">
+              <div className="postOwner">{userId?.name}</div>
+              <div className="date">
+                {new Date(createdAt).toDateString().replace("2024", " ")}
+                {/* poner algoritmo q diga q si es otro año lo ponga sino vacio */}
+                {/* puedo hacer lo mismo con post de hoy o de ayer */}
+              </div>
             </div>
             <div
               className="postContent"
