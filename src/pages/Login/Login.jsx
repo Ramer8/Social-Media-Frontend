@@ -78,7 +78,7 @@ export const Login = () => {
     dispatch(login({ credentials: decoded }))
 
     // Go to SuperAdmin Managment
-    if (decoded.tokenData.roleName === "super_admin") {
+    if (decoded?.tokenData?.roleName === "super_admin") {
       navigate("/managment")
       return
     }
