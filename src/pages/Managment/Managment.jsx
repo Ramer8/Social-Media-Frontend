@@ -139,7 +139,7 @@ const Managment = () => {
               <div className="body">
                 {users?.map((user) => (
                   <div key={user._id} className="row">
-                    <div>{user._id}</div>
+                    <div className="idUser">{user._id}</div>
                     <div>{user.name}</div>
                     <div>{user.email}</div>
                     <div>
