@@ -5,6 +5,7 @@ import "./Header.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { logout, userData } from "../../app/slices/userSlice"
+// import { fetchMyProfile } from "../../services/apiCalls"
 
 export const Header = () => {
   const location = useLocation()
@@ -14,8 +15,25 @@ export const Header = () => {
 
   const dispatch = useDispatch()
 
+  // useEffect(() => {
+  //   console.log(rdxUser, "passport credentials")
+  //   const fetch = async () => {
+  //     const fetched = await fetchMyProfile(rdxUser.credentials.token)
+  //     if (
+  //       !fetched?.success &&
+  //       fetched.message === "JWT NOT VALID OR TOKEN MALFORMED"
+  //     ) {
+  //       console.log("paso por log out")
+  //       dispatch(logout({ credentials: "" }))
+  //     }
+  //     return
+  //   }
+  // }, [rdxUser])
+
   useEffect(() => {
-    console.log(rdxUser, " passport credentials")
+    if (!rdxUser.credentials.token) {
+      navigate("/login")
+    }
   }, [rdxUser])
 
   return (
@@ -80,13 +98,13 @@ export const Header = () => {
                 location.pathname === "/login" ? "menuHighlighted" : "menu"
               }`}
             />
-            <CustomLink
+            {/* <CustomLink
               title="Register"
               destination="/register"
               className={`${
                 location.pathname === "/register" ? "menuHighlighted" : "menu"
               }`}
-            />
+            /> */}
           </div>
         )}
       </div>
