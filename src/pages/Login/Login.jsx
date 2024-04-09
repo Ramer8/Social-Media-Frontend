@@ -137,6 +137,12 @@ export const Login = () => {
         title={"Log in"}
         functionEmit={logMe}
       />
+      <div className="footerRedirection">
+        <div>Don't have an account? </div>
+        <div className="linkToRegister" onClick={() => navigate("/register")}>
+          Sign Up
+        </div>
+      </div>
       <ToastContainer />
     </div>
   )

@@ -47,3 +47,25 @@
     border-radius: 2em;
     padding: 1em;
 }
+
+.footerRedirection {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: .5em;
+}
+
+.linkToRegister {
+    font-weight: bolder;
+    color: #396cf0;
+}
+
+.linkToRegister:hover {
+    cursor: pointer;
+    text-shadow:
+        1px 1px 2px black,
+        0 0 1em blue,
+        0 0 0.2em blue;
+    color: whitesmoke;
+}
