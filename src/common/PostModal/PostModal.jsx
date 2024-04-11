@@ -63,7 +63,7 @@ const PostModal = ({
               functionEmit={closeModal}
             />
             <div className="bodyPostModal">
-              <label className="labelTextArea">Edit your post</label>
+              <labe className="labelTextArea">Edit your post</labe>
               <CustomInputTextArea
                 className="textareaNewPost textareaEditPost"
                 type={"text"}

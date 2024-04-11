@@ -47,7 +47,9 @@
 }
 
 .postContent:hover {
-    color: fuchsia;
+    /* color: fuchsia; */
+    background-color: rgba(218, 218, 218, 0.700);
+    border-radius: .5em;
 }
 
 .iconsInteraction {

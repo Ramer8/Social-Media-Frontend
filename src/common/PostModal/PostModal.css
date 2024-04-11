@@ -73,17 +73,12 @@
   }
 
   .labelTextArea {
+      margin: 0em;
+      padding-bottom: .5em;
       color: white;
       font-size: 1.2em;
       font-weight: 600;
   }
-
-  /* mudado */
-  .postContent {
-      color: blue;
-  }
-
-
 
   .buttons {
       display: flex;
@@ -93,12 +88,26 @@
 
   }
 
+  @media (prefers-color-scheme: dark) {
+      .postView {
+          background-color: rgba(11, 10, 10, 0.687);
+      }
+
+      .headerPostView {
+          color: whitesmoke;
+      }
+  }
+
+  @media (prefers-color-scheme: light) {
+      .postView {
+          background-color: rgba(123, 116, 116, 0.701);
+      }
+
+
+  }
 
   .postView {
-      background-color: rgba(11, 10, 10, 0.687);
-      /* -webkit-backdrop-filter: blur(5px); */
-      /* backdrop-filter: blur(9px); */
-
+      /* background-color: rgba(11, 10, 10, 0.687); */
       padding: .5em;
       border-top-right-radius: .5em;
       border-top-left-radius: .5em;
@@ -117,7 +126,7 @@
       align-items: center;
       flex-direction: row;
 
-      color: whitesmoke;
+      /* color: whitesmoke; */
       font-weight: 300;
       padding-top: .3em;
       padding-bottom: .3em;
@@ -147,17 +156,17 @@
 
   .showUsersLikes {
       position: absolute;
-      background-color: rgba(11, 10, 10, 0.687);
+      background-color: rgba(11, 10, 10, 0.987);
       -webkit-backdrop-filter: blur(5px);
       backdrop-filter: blur(9px);
       padding: 1em;
       border-radius: .5em;
       font-size: .8em;
+      color: antiquewhite;
   }
 
   .showUsersLikes:hover {
       cursor: pointer;
-      background-color: rgba(11, 10, 10, 0.987);
-      color: antiquewhite;
+      background-color: rgba(11, 10, 10, 0.5);
 
   }
