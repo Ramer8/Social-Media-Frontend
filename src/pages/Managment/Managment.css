@@ -16,6 +16,17 @@
     justify-content: space-around;
 }
 
+.postContainerTable {
+    max-width: 62%;
+    border: .5px solid gray;
+
+    margin-top: 1em;
+    padding: 1em;
+    border-radius: 1em;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .table {
     width: 100%;
 }
@@ -240,9 +251,9 @@ body {
 
 }
 
-@media(max-width: 800px) {
+/* @media(max-width: 800px) {
     padding: 20px;
-}
+} */
 
 @media (prefers-color-scheme: light) {
     input[type='checkbox'] {
@@ -270,7 +281,6 @@ body {
     .header {
         width: 100%;
         overflow-x: scroll;
-        overflow-x: scroll;
 
     }
 }
@@ -285,4 +295,22 @@ body {
         overflow-x: scroll;
 
     }
+}
+
+.postContainer {
+    margin-top: 1em;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+
+}
+
+.colorized {
+    color: darkviolet;
+    text-shadow:
+        1px 1px 2px black,
+        0 0 1em darkmagenta,
+        0 0 0.2em blue;
+    font-weight: 600;
 }

@@ -29,7 +29,7 @@ export const registerMe = async (credenciales) => {
   const options = {
     method: "POST", //  envio por post  email y password para logearme
     headers: {
-      "Content-Type": "application/json", // Esto para que es?
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(credenciales),
   }
@@ -281,29 +281,52 @@ export const fetchAllUsers = async (token) => {
     return error
   }
 }
-// export const deleteMoreThanOneUsers = async (array, token) => {
-//   const options = {
-//     method: "DELETE",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//     body: JSON.stringify(array),
-//   }
+export const deleteMoreThanOneUsers = async (array, token) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(array),
+  }
 
-//   try {
-//     const response = await fetch(
-//       `${import.meta.env.VITE_API_URL}/users`,
-//       options
-//     )
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users`,
+      options
+    )
 
-//     const data = await response.json()
-//     if (!data.success) {
-//       throw new Error(data.message)
-//     }
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}
+export const deleteMoreThanOnePosts = async (array, token) => {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(array),
+  }
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/posts`,
+      options
+    )
 
-//     return data
-//   } catch (error) {
-//     return error
-//   }
-// }
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}
