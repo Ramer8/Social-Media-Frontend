@@ -5,6 +5,7 @@ import "./Header.css"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { logout, userData } from "../../app/slices/userSlice"
+import { fetchMyProfile } from "../../services/apiCalls"
 // import { fetchMyProfile } from "../../services/apiCalls"
 
 export const Header = () => {
@@ -15,26 +16,24 @@ export const Header = () => {
 
   const dispatch = useDispatch()
 
+  useEffect(() => {
+    console.log(rdxUser, "passport credentials")
+    const fetch = async () => {
+      const fetched = await fetchMyProfile(rdxUser.credentials.token)
+      if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
+        console.log("paso por log out")
+        dispatch(logout({ credentials: "" }))
+      }
+      return
+    }
+    fetch()
+  }, [rdxUser])
+
   // useEffect(() => {
-  //   console.log(rdxUser, "passport credentials")
-  //   const fetch = async () => {
-  //     const fetched = await fetchMyProfile(rdxUser.credentials.token)
-  //     if (
-  //       !fetched?.success &&
-  //       fetched.message === "JWT NOT VALID OR TOKEN MALFORMED"
-  //     ) {
-  //       console.log("paso por log out")
-  //       dispatch(logout({ credentials: "" }))
-  //     }
-  //     return
+  //   if (!rdxUser.credentials.token) {
+  //     navigate("/login")
   //   }
   // }, [rdxUser])
-
-  useEffect(() => {
-    if (!rdxUser.credentials.token) {
-      navigate("/login")
-    }
-  }, [rdxUser])
 
   return (
     <>
