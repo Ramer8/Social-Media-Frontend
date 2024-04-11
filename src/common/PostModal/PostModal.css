@@ -63,6 +63,13 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      padding-top: .3em;
+  }
+
+  .userNamePostView {
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
   }
 
   .labelTextArea {
@@ -71,21 +78,12 @@
       font-weight: 600;
   }
 
+  /* mudado */
   .postContent {
       color: blue;
   }
 
-  .selectAppointment {
-      margin: .5em;
-      padding: .5em;
-      font-size: medium;
-      border: none;
-      border-radius: 1em;
-      outline: white;
-      background-color: darkgray;
-      color: black;
-      font-weight: 600;
-  }
+
 
   .buttons {
       display: flex;
@@ -95,9 +93,71 @@
 
   }
 
-  .dateInput {
+
+  .postView {
+      background-color: rgba(11, 10, 10, 0.687);
+      /* -webkit-backdrop-filter: blur(5px); */
+      /* backdrop-filter: blur(9px); */
+
+      padding: .5em;
+      border-top-right-radius: .5em;
+      border-top-left-radius: .5em;
+
+      width: 100%;
+  }
+
+  .userNamePostView {
+      color: black;
+      font-weight: 800;
+  }
+
+  .headerPostView {
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
-      flex-direction: column;
+      flex-direction: row;
+
+      color: whitesmoke;
+      font-weight: 300;
+      padding-top: .3em;
+      padding-bottom: .3em;
+
+  }
+
+  .leftHeaderPostView {
+      font-size: .8em;
+  }
+
+  .rightHeaderPostView {
+      font-size: .9em
+  }
+
+  .contentPostView {
+      background-color: rgba(205, 205, 205, 0.075);
+      border-radius: .5em;
+      padding: 1em;
+      color: black;
+      font-weight: 600;
+  }
+
+  .likesPostView {
+      display: flex;
+      gap: .5em;
+  }
+
+  .showUsersLikes {
+      position: absolute;
+      background-color: rgba(11, 10, 10, 0.687);
+      -webkit-backdrop-filter: blur(5px);
+      backdrop-filter: blur(9px);
+      padding: 1em;
+      border-radius: .5em;
+      font-size: .8em;
+  }
+
+  .showUsersLikes:hover {
+      cursor: pointer;
+      background-color: rgba(11, 10, 10, 0.987);
+      color: antiquewhite;
+
   }

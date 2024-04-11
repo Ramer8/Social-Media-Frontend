@@ -9,6 +9,7 @@ import {
 import "react-swipeable-list/dist/styles.css"
 import { CustomButton } from "../CustomButton/CustomButton"
 import PostModal from "../PostModal/PostModal"
+import "./PostElement.css"
 
 const PostElement = ({
   newPost,
@@ -19,6 +20,8 @@ const PostElement = ({
   inputHandler,
 }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [modalIsOpenView, setModalIsOpenView] = useState(false)
+
   const { createdAt, _id, content, likes, userId } = element
 
   const leadingActions = () => (
@@ -43,6 +46,10 @@ const PostElement = ({
       </SwipeAction>
     </TrailingActions>
   )
+  const putModalOn = () => {
+    setModalIsOpenView(true)
+    setModalIsOpen(true)
+  }
   return (
     <div>
       <SwipeableList>
@@ -61,7 +68,9 @@ const PostElement = ({
             </div>
             <div
               className="postContent"
-              onClick={() => console.log(element._id)} // hacer funcion para mostrar cita
+              // onClick={() => setModalIsOpenView(true)}
+              onClick={() => putModalOn()}
+              // hacer funcion para mostrar cita
               //traer todas las citas de los usuarios.
             >
               {content}
@@ -73,6 +82,8 @@ const PostElement = ({
               editMyPost={editMyPost}
               modalIsOpen={modalIsOpen}
               setModalIsOpen={setModalIsOpen}
+              modalIsOpenView={modalIsOpenView}
+              setModalIsOpenView={setModalIsOpenView}
             />
             <div className="iconsInteraction">
               <div className="likesElements">
@@ -96,7 +107,7 @@ const PostElement = ({
                     </>
                   }
                   functionEmit={() => likesPost(_id)}
-                ></CustomButton>{" "}
+                />{" "}
                 {likes.length}
               </div>
               <div className="comments">

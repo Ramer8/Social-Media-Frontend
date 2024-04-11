@@ -1,5 +1,4 @@
 .homeDesign {
-    /* height: 84vh; */
     height: 90vh;
     /* height: auto; */
     width: 100vw;
@@ -12,13 +11,13 @@
 }
 
 .boxContainer {
-
     /* width: 50%;  when create the other profile box with pic active this line!*/
-    display: flex;
+    /* display: flex; */
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: .5em;
+    width: 100%;
     /* border: 1px solid #ffffff40; */
     /* luego quitar el borde o agregar para ver con otro objeto */
 }

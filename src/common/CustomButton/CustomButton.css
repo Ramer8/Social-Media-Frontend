@@ -190,7 +190,6 @@
     font-size: 1em;
     width: 100%;
     padding: .5em 2em;
-    /* padding: .5em 4em; */
     display: flex;
     border-bottom-left-radius: 1em;
     justify-content: center;
@@ -207,6 +206,35 @@
     /* border: .1px red solid; */
     background-color: transparent;
 }
+
+.likesModalButtonViews {
+    border-bottom-left-radius: 1em;
+    /* border-bottom-right-radius: 1em; */
+    font-size: 1em;
+    width: 100%;
+    padding: .5em 2em;
+    display: flex;
+    border-bottom-left-radius: 1em;
+    justify-content: center;
+    align-items: center;
+
+    max-width: 100%;
+
+    background-color: blue;
+}
+
+.likesModalButtonViews:hover {
+    cursor: pointer;
+    color: blue;
+    /* border: .1px red solid; */
+    background-color: transparent;
+}
+
+.cancelModalButtonView {
+    border-bottom-right-radius: 1em;
+    border-bottom-left-radius: 0em
+}
+
 
 .closeModalButton {
     display: flex;
