@@ -68,7 +68,7 @@
 }
 
 .idUser {
-    text-overflow: ellipsis;
+    text-overflow: hidden;
     white-space: nowrap;
     overflow: scroll;
 }

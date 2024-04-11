@@ -244,7 +244,7 @@ const Managment = () => {
                   <div key={user._id} className="row">
                     <div className="idUser">{user._id}</div>
                     <div>{user.name}</div>
-                    <div>{user.email}</div>
+                    <div>{user?.email}</div>
                     <div className={`${user.role === "user" && "colorized"}`}>
                       {user.role}
                     </div>
@@ -303,8 +303,8 @@ const Managment = () => {
                     <div>{post.content}</div>
                     <div>{post.likes.length}</div>
                     <div>{new Date(post.createdAt).toDateString()}</div>
-                    <div>{post.userId.email}</div>
-                    <div>{post.userId._id}</div>
+                    <div>{post?.userId.email}</div>
+                    <div>{post?.userId._id}</div>
                     <div>
                       <input
                         id="s1"
