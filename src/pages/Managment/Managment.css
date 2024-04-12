@@ -27,7 +27,7 @@
     justify-content: center;
 }
 
-.table {
+.userTable {
     width: 100%;
 }
 
@@ -35,7 +35,7 @@
     display: flex;
     border-bottom: 1px solid gray;
     padding-bottom: .5em;
-
+    gap: 1em;
 }
 
 .leftSide {
@@ -43,16 +43,22 @@
     font-size: 1.5em;
 }
 
+.searchBar {
+    display: flex;
+    gap: 1em;
+
+}
+
+
 .deleteUsers {
 
     flex: none;
-    margin-inline: 1em;
+    padding-right: 1em;
     background-color: transparent;
     border: none;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    flex-direction: row;
 }
 
 .deleteUsers:hover {

@@ -278,3 +278,16 @@
         background-color: black;
     }
 }
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0em;
+    margin: 0em;
+}
+
+.search:hover {
+    cursor: pointer;
+    color: red;
+}

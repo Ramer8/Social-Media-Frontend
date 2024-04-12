@@ -23,6 +23,7 @@ const Managment = () => {
   const [loadedData, setLoadedData] = useState(false)
   const [users, setUsers] = useState()
   const [posts, setPosts] = useState()
+  // const [userSearched, setUserSearched] = useState()
 
   const [searchUser, setSearchUser] = useState("")
 
@@ -50,8 +51,6 @@ const Managment = () => {
   }, [searchUser])
 
   useEffect(() => {
-    console.log(searchUserRdx, "estas aqui")
-
     if (!rdxUser.credentials.token) {
       navigate("/")
     }
@@ -78,6 +77,7 @@ const Managment = () => {
       }
     }
     const fetchingPost = async () => {
+      console.log("paso x aca?")
       try {
         const fetched = await getAllUsersPosts(rdxUser.credentials.token)
 
@@ -99,7 +99,7 @@ const Managment = () => {
       fetching()
       fetchingPost()
     }
-  }, [loadedData])
+  }, [loadedData, searchUserRdx.criteriaUser])
 
   const handleCheck = (id) => {
     setCheckButton(!checkButton)
@@ -200,7 +200,11 @@ const Managment = () => {
 
   const search = async () => {
     try {
-      console.log(searchUserRdx)
+      // console.log(!searchUserRdx.criteriaUser)
+      // if (!searchUserRdx.criteriaUser) {
+
+      // }
+
       const fetched = await searchUsers(
         searchUserRdx.criteriaUser,
         rdxUser.credentials.token
@@ -214,8 +218,9 @@ const Managment = () => {
       if (fetched?.success) {
         toast.warn(fetched.message, { theme: "dark" })
       }
-      console.log(fetched)
-      // setPostChanged(!postChanged)
+      console.log(fetched.data)
+      setUsers(fetched.data)
+
       // setNewPost({ content: "" })
     } catch (error) {
       console.log(error)
@@ -227,28 +232,39 @@ const Managment = () => {
   return (
     <div className="managmentDesign">
       <div className="userContainer">
-        <div className="searchBar">
-          <CustomInput
-            className={search}
-            type="email"
-            name="email"
-            value={searchUser || ""}
-            // placeholder="search"
-            functionChange={inputHandler}
-          />
-          <CustomButton
-            className={"search"}
-            title={"search"}
-            functionEmit={() => search()}
-          />
-        </div>
         {!users?.length && "No users loaded"}
         {users && (
-          <div className="table">
+          <div className="userTable">
             <div className="preHeader">
               <div className="leftSide">
                 User list
                 {/* {arrayToDelete.length == !0 && `Selected ${arrayToDelete.length}`} */}
+              </div>
+              <CustomButton
+                className={"search"}
+                title={
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-search"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                  </svg>
+                }
+                functionEmit={() => search()}
+              />
+              <div className="searchBar">
+                <CustomInput
+                  className="inputDesign searchInputUser"
+                  type="email"
+                  name="email"
+                  value={searchUser || ""}
+                  placeholder="search.."
+                  functionChange={inputHandler}
+                />
               </div>
               <CustomButton
                 className={"deleteUsers"}
