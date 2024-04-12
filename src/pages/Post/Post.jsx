@@ -43,7 +43,6 @@ const Post = () => {
     const fetching = async () => {
       try {
         const fetched = await getAllUsersPosts(rdxUser.credentials.token)
-        // const fetched = await getMyPosts(rdxUser.credentials.token)
         // add function delete and edit to not avoid delete other users post.
         // and put if the post its yours put "you" instead of the your name
         if (!fetched?.success) {

@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react"
 import "./Managment.css"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-// import { deleteMoreThanOneUsers, fetchAllUsers } from "../../services/apiCalls"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
 import { ToastContainer, toast } from "react-toastify"
 
@@ -12,21 +11,20 @@ import {
   deleteMoreThanOneUsers,
   fetchAllUsers,
   getAllUsersPosts,
-  updateMyPost,
+  searchUsers,
 } from "../../services/apiCalls"
-import PostElement from "../../common/PostElement/PostElement"
+import { CustomInput } from "../../common/CustomInput/CustomInput"
+import {
+  searchUserData,
+  updateUserCriteria,
+} from "../../app/slices/searchUserSlice"
 
 const Managment = () => {
   const [loadedData, setLoadedData] = useState(false)
   const [users, setUsers] = useState()
   const [posts, setPosts] = useState()
-  const [usersToDelete, setUsersToDelete] = useState({})
-  const [newPost, setNewPost] = useState({
-    content: "",
-  })
-  const [myPosts, setMyPosts] = useState()
 
-  const [postChanged, setPostChanged] = useState(false)
+  const [searchUser, setSearchUser] = useState("")
 
   const [checkButton, setCheckButton] = useState(false)
   const [checkButtonPost, setCheckButtonPost] = useState(false)
@@ -36,15 +34,28 @@ const Managment = () => {
 
   const rdxUser = useSelector(userData)
 
+  const searchUserRdx = useSelector(searchUserData)
+
   const dispatch = useDispatch()
 
   const navigate = useNavigate()
 
   useEffect(() => {
+    const searching = setTimeout(() => {
+      dispatch(updateUserCriteria(searchUser))
+    }, 375)
+    return () => {
+      clearTimeout(searching)
+    }
+  }, [searchUser])
+
+  useEffect(() => {
+    console.log(searchUserRdx, "estas aqui")
+
     if (!rdxUser.credentials.token) {
       navigate("/")
     }
-  }, [rdxUser])
+  }, [rdxUser, searchUserRdx])
 
   useEffect(() => {
     const fetching = async () => {
@@ -147,7 +158,6 @@ const Managment = () => {
     } else {
       arrayToDeletePost.push(id)
     }
-    console.log(arrayToDeletePost, "del handle los id a borrar")
     setCheckButtonPost(false)
 
     // setUsersToDelete({ usersId: arrayToDelete })
@@ -184,28 +194,54 @@ const Managment = () => {
     arrayToDeletePost = []
     setLoadedData(!loadedData)
   }
+  const inputHandler = (e) => {
+    setSearchUser(e.target.value)
+  }
 
-  // const editMyPost = async (id) => {
-  //   try {
-  //     const fetched = await updateMyPost(id, newPost, rdxUser.credentials.token)
-  //     if (!fetched?.success) {
-  //       if (!rdxUser.credentials.token === undefined) {
-  //         throw new Error("Failed to fetch Appointment data")
-  //       }
-  //     }
-  //     if (fetched?.success) {
-  //       toast.warn(fetched.message, { theme: "dark" })
-  //     }
-  //     setPostChanged(!postChanged)
-  //     setNewPost({ content: "" })
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
+  const search = async () => {
+    try {
+      console.log(searchUserRdx)
+      const fetched = await searchUsers(
+        searchUserRdx.criteriaUser,
+        rdxUser.credentials.token
+      )
+      console.log(fetched)
+      if (!fetched?.success) {
+        if (!rdxUser.credentials.token === undefined) {
+          throw new Error("Failed to fetch Appointment data")
+        }
+      }
+      if (fetched?.success) {
+        toast.warn(fetched.message, { theme: "dark" })
+      }
+      console.log(fetched)
+      // setPostChanged(!postChanged)
+      // setNewPost({ content: "" })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  useEffect(() => {
+    console.log(searchUserRdx?.criteriaUser)
+  }, [searchUserRdx?.criteriaUser])
   return (
     <div className="managmentDesign">
       <div className="userContainer">
+        <div className="searchBar">
+          <CustomInput
+            className={search}
+            type="email"
+            name="email"
+            value={searchUser || ""}
+            // placeholder="search"
+            functionChange={inputHandler}
+          />
+          <CustomButton
+            className={"search"}
+            title={"search"}
+            functionEmit={() => search()}
+          />
+        </div>
         {!users?.length && "No users loaded"}
         {users && (
           <div className="table">

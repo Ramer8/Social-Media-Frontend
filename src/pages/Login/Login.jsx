@@ -95,6 +95,7 @@ export const Login = () => {
       toast.warn(credencialesError.emailError, { theme: "dark" })
     credencialesError.passwordError &&
       toast.warn(credencialesError.passwordError, { theme: "dark" })
+
     setTimeout(() => {
       if (credencialesError.passwordError || credencialesError.emailError) {
         setCredencialesError({

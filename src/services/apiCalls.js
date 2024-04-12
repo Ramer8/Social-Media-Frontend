@@ -330,3 +330,26 @@ export const deleteMoreThanOnePosts = async (array, token) => {
     return error
   }
 }
+
+export const searchUsers = async (email, token) => {
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  try {
+    const response = await fetch(
+      `${import.meta.env.VITE_API_URL}/users?email=${email}`,
+      options
+    )
+    const data = await response.json()
+    if (!data.success) {
+      throw new Error(data.message)
+    }
+    return data
+  } catch (error) {
+    return error
+  }
+}

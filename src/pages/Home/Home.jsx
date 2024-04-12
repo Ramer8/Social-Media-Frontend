@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react"
-import { fetchMyProfile } from "../../services/apiCalls"
+import { fetchMyProfile, searchUsers } from "../../services/apiCalls"
 import { useNavigate } from "react-router-dom"
 
 import "./Home.css"
 import Profile from "../Profile/Profile"
 import Post from "../Post/Post"
+import { searchUserData } from "../../app/slices/searchUserSlice"
+import { useSelector } from "react-redux"
+
 // import Card from "../../common/Card/Card"
 
 export const Home = () => {
@@ -16,6 +19,8 @@ export const Home = () => {
 
   const navigate = useNavigate()
 
+  const elhdp = useSelector(searchUserData)
+  console.log(elhdp)
   useEffect(() => {
     const fetching = async () => {
       try {

@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { logout, userData } from "../../app/slices/userSlice"
 import { fetchMyProfile } from "../../services/apiCalls"
-// import { fetchMyProfile } from "../../services/apiCalls"
 
 export const Header = () => {
   const location = useLocation()
@@ -24,6 +23,7 @@ export const Header = () => {
       if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
         console.log("paso por log out")
         dispatch(logout({ credentials: "" }))
+        navigate("/login")
       }
       return
     }
