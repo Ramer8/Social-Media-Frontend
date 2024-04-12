@@ -1,4 +1,5 @@
 .post {
+    transition: all .3s;
     overflow-y: scroll;
     overflow-x: hidden;
     /* max-width: 30em; */
@@ -13,7 +14,8 @@
 
     display: flex;
     flex-direction: column;
-    background-color: whitesmoke;
+    background-color: rgb(42, 61, 82)
+        /* background-color: whitesmoke; */
 
 }
 
@@ -25,12 +27,16 @@
 }
 
 .postOwner {
-    color: dimgray;
+    color: lightgrey;
 }
 
 @media (prefers-color-scheme: light) {
     .postOwner {
         color: dimgray;
+    }
+
+    .post {
+        background-color: rgba(218, 218, 218, 0.700);
     }
 }
 
@@ -42,13 +48,12 @@
 }
 
 .postContent {
-    color: blue;
+    color: #386cf0;
     cursor: pointer;
 }
 
 .postContent:hover {
-    /* color: fuchsia; */
-    background-color: rgba(218, 218, 218, 0.700);
+    background-color: #386cf038;
     border-radius: .5em;
 }
 

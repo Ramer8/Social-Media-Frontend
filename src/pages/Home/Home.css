@@ -22,6 +22,26 @@
     /* luego quitar el borde o agregar para ver con otro objeto */
 }
 
+@media(min-width: 500px) {
+    .boxContainer {
+        width: 70%;
+
+    }
+}
+
+@media(min-width: 700px) {
+    .boxContainer {
+        width: 50%;
+
+    }
+}
+
+@media(min-width: 1000px) {
+    .boxContainer {
+        width: 45%;
+
+    }
+}
 
 .title {
     flex: 1;
