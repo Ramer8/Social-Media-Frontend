@@ -2,10 +2,17 @@ import "./Managment.css"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
+import { CustomInput } from "../../common/CustomInput/CustomInput"
+
 import { ToastContainer, toast } from "react-toastify"
 
 import { useDispatch, useSelector } from "react-redux"
 import { logout, userData } from "../../app/slices/userSlice"
+import {
+  searchUserData,
+  updateUserCriteria,
+} from "../../app/slices/searchUserSlice"
+
 import {
   deleteMoreThanOnePosts,
   deleteMoreThanOneUsers,
@@ -13,17 +20,11 @@ import {
   getAllUsersPosts,
   searchUsers,
 } from "../../services/apiCalls"
-import { CustomInput } from "../../common/CustomInput/CustomInput"
-import {
-  searchUserData,
-  updateUserCriteria,
-} from "../../app/slices/searchUserSlice"
 
 const Managment = () => {
   const [loadedData, setLoadedData] = useState(false)
   const [users, setUsers] = useState()
   const [posts, setPosts] = useState()
-  // const [userSearched, setUserSearched] = useState()
 
   const [searchUser, setSearchUser] = useState("")
 
@@ -77,7 +78,6 @@ const Managment = () => {
       }
     }
     const fetchingPost = async () => {
-      console.log("paso x aca?")
       try {
         const fetched = await getAllUsersPosts(rdxUser.credentials.token)
 
@@ -159,7 +159,6 @@ const Managment = () => {
       arrayToDeletePost.push(id)
     }
     setCheckButtonPost(false)
-
     // setUsersToDelete({ usersId: arrayToDelete })
   }
   const deletePosts = async () => {
@@ -194,21 +193,22 @@ const Managment = () => {
     arrayToDeletePost = []
     setLoadedData(!loadedData)
   }
+
   const inputHandler = (e) => {
     setSearchUser(e.target.value)
   }
 
   const search = async () => {
     try {
-      // console.log(!searchUserRdx.criteriaUser)
-      // if (!searchUserRdx.criteriaUser) {
-
-      // }
-
-      const fetched = await searchUsers(
-        searchUserRdx.criteriaUser,
-        rdxUser.credentials.token
-      )
+      let searchParam
+      if (searchUserRdx.criteriaUser.includes("@")) {
+        // Looks like an email
+        searchParam = `email=${searchUser}`
+      } else {
+        // Looks like a name
+        searchParam = `name=${searchUser}`
+      }
+      const fetched = await searchUsers(searchParam, rdxUser.credentials.token)
       console.log(fetched)
       if (!fetched?.success) {
         if (!rdxUser.credentials.token === undefined) {
@@ -220,8 +220,6 @@ const Managment = () => {
       }
       console.log(fetched.data)
       setUsers(fetched.data)
-
-      // setNewPost({ content: "" })
     } catch (error) {
       console.log(error)
     }

@@ -331,7 +331,7 @@ export const deleteMoreThanOnePosts = async (array, token) => {
   }
 }
 
-export const searchUsers = async (email, token) => {
+export const searchUsers = async (searchParam, token) => {
   const options = {
     method: "GET",
     headers: {
@@ -341,7 +341,11 @@ export const searchUsers = async (email, token) => {
   }
   try {
     const response = await fetch(
-      `${import.meta.env.VITE_API_URL}/users?email=${email}`,
+      // api/users?email=john@example.com&name=John `/api/users?${searchParam}`
+
+      // `${import.meta.env.VITE_API_URL}/users?email=${email}&name=${name}`,
+      // `${import.meta.env.VITE_API_URL}/users?email=${email}`,
+      `${import.meta.env.VITE_API_URL}/users?${searchParam}`,
       options
     )
     const data = await response.json()

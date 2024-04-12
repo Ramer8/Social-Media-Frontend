@@ -18,6 +18,7 @@
 
 .postContainerTable {
     max-width: 62%;
+    max-height: 20vh;
     border: .5px solid gray;
 
     margin-top: 1em;
