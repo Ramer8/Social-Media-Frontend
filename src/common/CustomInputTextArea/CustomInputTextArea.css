@@ -22,11 +22,17 @@
     text-align: left;
     border: none;
     /* border: 1px solid #e9ecef; */
-
     /* color: #212529;
     background: whitesmoke; */
+    /* background-color: rgb(42, 61, 82, .5); */
     overflow-wrap: break-word;
     padding: 1em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .textareaNewPost {
+        background-color: rgb(42, 61, 82)
+    }
 }
 
 @media(min-width: 500px) {

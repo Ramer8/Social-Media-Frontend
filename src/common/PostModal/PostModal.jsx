@@ -34,7 +34,6 @@ const PostModal = ({
     editMyPost(id)
     closeModal()
   }
-  console.log(thePost)
   return (
     <div className="postModalContainter">
       <Modal

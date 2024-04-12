@@ -90,7 +90,8 @@
 
   @media (prefers-color-scheme: dark) {
       .postView {
-          background-color: rgba(11, 10, 10, 0.687);
+          background-color: rgb(42, 61, 82);
+          /* background-color: rgba(11, 10, 10, 0.687); */
       }
 
       .headerPostView {

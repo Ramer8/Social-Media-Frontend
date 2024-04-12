@@ -31,14 +31,14 @@
 
 @media(min-width: 700px) {
     .boxContainer {
-        width: 50%;
+        width: 45%;
 
     }
 }
 
 @media(min-width: 1000px) {
     .boxContainer {
-        width: 45%;
+        width: 50%;
 
     }
 }
