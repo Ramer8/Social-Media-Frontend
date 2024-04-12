@@ -16,6 +16,7 @@ export const Header = () => {
 
   const dispatch = useDispatch()
 
+  // console.log(rdxUser.credentials.tokenData.roleName)
   useEffect(() => {
     console.log(rdxUser, "passport credentials")
     const fetch = async () => {
@@ -38,6 +39,17 @@ export const Header = () => {
   return (
     <>
       <div className="headerDesign">
+        <div className="menu">
+          {/* {rdxUser?.credentials.tokenData.roleName === "super_admin" && ( */}
+          <CustomLink
+            title="Managment"
+            destination="/managment"
+            className={`${
+              location.pathname === "/managment" ? "menuHighlighted" : "menu"
+            }`}
+          />
+          {/* )} */}
+        </div>
         <CustomLink
           title={
             <svg
@@ -97,13 +109,6 @@ export const Header = () => {
                 location.pathname === "/login" ? "menuHighlighted" : "menu"
               }`}
             />
-            {/* <CustomLink
-              title="Register"
-              destination="/register"
-              className={`${
-                location.pathname === "/register" ? "menuHighlighted" : "menu"
-              }`}
-            /> */}
           </div>
         )}
       </div>
