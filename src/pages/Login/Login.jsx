@@ -15,12 +15,12 @@ import { useDispatch } from "react-redux"
 import { login } from "../../app/slices/userSlice"
 
 export const Login = () => {
-  const [credenciales, setCredenciales] = useState({
+  const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   })
 
-  const [credencialesError, setCredencialesError] = useState({
+  const [credentialsError, setCredentialsError] = useState({
     emailError: "",
     passwordError: "",
   })
@@ -35,32 +35,31 @@ export const Login = () => {
   const checkError = (e) => {
     const error = validame(e.target.name, e.target.value)
 
-    setCredencialesError((prevState) => ({
+    setCredentialsError((prevState) => ({
       ...prevState,
       [e.target.name + "Error"]: error,
     }))
   }
 
   const inputHandler = (e) => {
-    setCredenciales((prevState) => ({
+    setCredentials((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }))
   }
 
   const logMe = async () => {
-    for (let credencial in credenciales) {
-      if (credenciales[credencial] === "") {
+    for (let credential in credentials) {
+      if (credentials[credential] === "") {
         toast.error("You must fill in all fields", {
           theme: "colored",
           position: "top-left",
         })
-
         return
       }
     }
 
-    const fetched = await loginMe(credenciales)
+    const fetched = await loginMe(credentials)
     if (!fetched.success) {
       toast.error(fetched.message, { theme: "colored", position: "top-left" })
 
@@ -94,38 +93,38 @@ export const Login = () => {
 
   useEffect(() => {
     toast.dismiss() //clear all the messages
-    credencialesError.emailError &&
-      toast.warn(credencialesError.emailError, {
+    credentialsError.emailError &&
+      toast.warn(credentialsError.emailError, {
         theme: "colored",
         autoClose: 1500,
       })
-    credencialesError.passwordError &&
-      toast.warn(credencialesError.passwordError, {
+    credentialsError.passwordError &&
+      toast.warn(credentialsError.passwordError, {
         theme: "colored",
         autoClose: 1500,
       })
 
     setTimeout(() => {
-      if (credencialesError.passwordError || credencialesError.emailError) {
-        setCredencialesError({
+      if (credentialsError.passwordError || credentialsError.emailError) {
+        setCredentialsError({
           emailError: "",
           passwordError: "",
         })
       }
     }, ERROR_MSG_TIME)
-  }, [credencialesError])
+  }, [credentialsError])
 
   return (
     <div className="loginDesign">
-      {/* <pre>{JSON.stringify(credenciales, null, 2)}</pre> */}
+      {/* <pre>{JSON.stringify(credentials, null, 2)}</pre> */}
       <label>Name:</label>
       <CustomInput
         className={`inputDesign ${
-          credencialesError.emailError !== "" ? "inputDesignError" : ""
+          credentialsError.emailError !== "" ? "inputDesignError" : ""
         }`}
         type="email"
         name="email"
-        value={credenciales.email || ""}
+        value={credentials.email || ""}
         placeholder="email"
         functionChange={inputHandler}
         onBlurFunction={(e) => checkError(e)}
@@ -133,11 +132,11 @@ export const Login = () => {
       <label>Password:</label>
       <CustomInput
         className={`inputDesign ${
-          credencialesError.passwordError !== "" ? "inputDesignError" : ""
+          credentialsError.passwordError !== "" ? "inputDesignError" : ""
         }`}
         type="password"
         name="password"
-        value={credenciales.password || ""}
+        value={credentials.password || ""}
         placeholder="password"
         functionChange={inputHandler}
         onBlurFunction={(e) => checkError(e)}

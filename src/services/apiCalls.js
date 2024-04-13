@@ -1,8 +1,8 @@
 export const loginMe = async (credenciales) => {
   const options = {
-    method: "POST", //  envio por post  email y password para logearme
+    method: "POST",
     headers: {
-      "Content-Type": "application/json", // Esto para que es?
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(credenciales),
   }
@@ -14,7 +14,6 @@ export const loginMe = async (credenciales) => {
     )
 
     const data = await response.json()
-    console.log(data)
     if (!data.success) {
       throw new Error(data.message)
     }
@@ -27,7 +26,7 @@ export const loginMe = async (credenciales) => {
 
 export const registerMe = async (credenciales) => {
   const options = {
-    method: "POST", //  envio por post  email y password para logearme
+    method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
@@ -41,7 +40,6 @@ export const registerMe = async (credenciales) => {
     )
 
     const data = await response.json()
-    console.log(data)
     if (!data.success) {
       throw new Error(data.message)
     }
@@ -126,30 +124,6 @@ export const getAllUsersPosts = async (token) => {
     return error
   }
 }
-//Changed for previous function..
-// export const getMyPosts = async (token) => {
-//   const options = {
-//     method: "GET",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Authorization: `Bearer ${token}`,
-//     },
-//   }
-//   try {
-//     const response = await fetch(
-//       `${import.meta.env.VITE_API_URL}/posts/own`,
-//       options
-//     )
-
-//     const data = await response.json()
-//     if (!data.success) {
-//       throw new Error(data.message)
-//     }
-//     return data
-//   } catch (error) {
-//     return error
-//   }
-// }
 export const createPost = async (data, token) => {
   const options = {
     method: "POST",
@@ -185,7 +159,6 @@ export const putlikes = async (userId, token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    // body: JSON.stringify(data),
     params: JSON.stringify(userId),
   }
 
