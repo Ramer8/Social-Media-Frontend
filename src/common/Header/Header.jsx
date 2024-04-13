@@ -15,13 +15,12 @@ export const Header = () => {
 
   const dispatch = useDispatch()
 
-  // console.log(rdxUser.credentials.tokenData.roleName)
   useEffect(() => {
     console.log(rdxUser, "passport credentials")
     const fetch = async () => {
       const fetched = await fetchMyProfile(rdxUser.credentials.token)
+
       if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
-        console.log("paso por log out")
         dispatch(logout({ credentials: "" }))
         navigate("/login")
       }

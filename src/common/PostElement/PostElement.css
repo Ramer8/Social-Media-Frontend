@@ -1,5 +1,5 @@
 .post {
-    transition: all .3s;
+    transition: all .5s ease-out;
     overflow-y: scroll;
     overflow-x: hidden;
     /* max-width: 30em; */
@@ -17,6 +17,40 @@
     background-color: rgb(42, 61, 82)
         /* background-color: whitesmoke; */
 
+}
+
+.postHighlighted {
+    background-color: rgb(42, 45, 82)
+        /* background-color: red; */
+}
+
+@media (prefers-color-scheme: light) {
+    .postHighlighted {
+        background-color: rgba(218, 218, 218, 0.20) !important;
+    }
+}
+
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .hoverPostText {
+    visibility: hidden;
+    width: auto;
+    text-align: center;
+    flex: row;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    margin: 0em 15em;
+    transition: 0.3s;
+}
+
+.tooltip:hover .hoverPostText {
+    visibility: visible;
 }
 
 .headerPost {
@@ -52,7 +86,7 @@
 }
 
 .postContent:hover {
-    background-color: #386cf038;
+    color: #90a7e1;
     border-radius: .5em;
 }
 

@@ -56,7 +56,7 @@ const Profile = () => {
       [e.target.name + "Error"]: error,
     }))
   }
-
+  console.log(rdxUser)
   useEffect(() => {
     if (!rdxUser.credentials.token) {
       navigate("/login")
@@ -70,19 +70,21 @@ const Profile = () => {
 
         if (!fetched?.success) {
           if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
+            console.log("pasa por aca?")
             dispatch(logout({ credentials: "" }))
 
             toast.error(fetched.message, {
               theme: "dark",
               position: "top-left",
             })
+            return
           }
           toast.error(fetched.message, {
             theme: "dark",
             position: "top-left",
           })
           navigate("/login")
-          throw new Error("Failed to fetch profile data")
+          return
         }
         setLoadedData(true)
         setUser({
@@ -95,7 +97,7 @@ const Profile = () => {
     if (!loadedData) {
       fetching()
     }
-  }, []) // Execute useEffect whenever the user changes
+  }, [rdxUser]) // Execute useEffect whenever the user changes
 
   const updateData = async () => {
     if (!userError.name) {

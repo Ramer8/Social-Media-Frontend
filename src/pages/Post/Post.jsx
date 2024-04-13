@@ -1,24 +1,24 @@
+import "./Post.css"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { useSelector } from "react-redux"
 import { userData } from "../../app/slices/userSlice"
+
 import {
   createPost,
   deletePost,
   getAllUsersPosts,
-  // getMyPosts,
   putlikes,
   updateMyPost,
 } from "../../services/apiCalls"
 
-import "./Post.css"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
 import { CustomInputTextArea } from "../../common/CustomInputTextArea/CustomInputTextArea"
+import PostElement from "../../common/PostElement/PostElement"
 
 import { ToastContainer, toast } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
-import PostElement from "../../common/PostElement/PostElement"
 
 const Post = () => {
   const [myPosts, setMyPosts] = useState()
@@ -35,10 +35,11 @@ const Post = () => {
 
   useEffect(() => {
     if (!rdxUser.credentials.token) {
-      navigate("/")
+      navigate("/login")
     }
   }, [rdxUser])
 
+  // initial load and read post changes with the flag
   useEffect(() => {
     const fetching = async () => {
       try {
@@ -112,7 +113,7 @@ const Post = () => {
         }
       }
       if (fetched?.success) {
-        toast.warn(fetched.message, { theme: "dark" })
+        toast.warn(fetched.message, { theme: "colored", position: "top-left" })
       }
       setPostChanged(!postChanged)
     } catch (error) {
@@ -122,6 +123,8 @@ const Post = () => {
 
   const editMyPost = async (id) => {
     try {
+      console.log(id, "el de edit post")
+      console.log(newPost, "el post que envio")
       const fetched = await updateMyPost(id, newPost, rdxUser.credentials.token)
       if (!fetched?.success) {
         if (!rdxUser.credentials.token === undefined) {
@@ -129,7 +132,7 @@ const Post = () => {
         }
       }
       if (fetched?.success) {
-        toast.warn(fetched.message, { theme: "dark" })
+        toast.warn(fetched.message, { theme: "colored", position: "top-left" })
       }
       setPostChanged(!postChanged)
       setNewPost({ content: "" })
@@ -214,7 +217,7 @@ const Post = () => {
                 </div>
               </div>
             )}
-            {myNewPost && (
+            {myPosts && (
               <div className="postList">
                 {myPosts?.map((element) => (
                   <div key={element._id}>
@@ -235,7 +238,7 @@ const Post = () => {
           </div>
         </div>
       </>
-      <ToastContainer />
+      <ToastContainer autoClose={500} />
     </div>
   )
 }

@@ -1,36 +1,36 @@
 import { useEffect, useState } from "react"
 import { fetchMyProfile, searchUsers } from "../../services/apiCalls"
 import { useNavigate } from "react-router-dom"
+import { ToastContainer, toast } from "react-toastify"
 
 import "./Home.css"
 import Profile from "../Profile/Profile"
 import Post from "../Post/Post"
 import { searchUserData } from "../../app/slices/searchUserSlice"
 import { useSelector } from "react-redux"
-
-// import Card from "../../common/Card/Card"
+import { userData } from "../../app/slices/userSlice"
 
 export const Home = () => {
-  const [active, setActive] = useState(false)
-  const [tokenStorage, setTokenStorage] = useState(
-    JSON.parse(localStorage.getItem("decoded"))?.token
-  )
+  const [activeMenu, setActiveMenu] = useState(false)
   const [showProfile, setShowProfile] = useState()
 
   const navigate = useNavigate()
 
-  const elhdp = useSelector(searchUserData)
-  console.log(elhdp)
+  const rdxUser = useSelector(userData)
+
+  const searchCriteria = useSelector(searchUserData)
+  // console.log(searchCriteria)  if not use this I can delete it!
+  // when arrive to home view load the value from magament by redux
+
   useEffect(() => {
     const fetching = async () => {
       try {
-        const fetched = await fetchMyProfile(tokenStorage)
+        const fetched = await fetchMyProfile(rdxUser.credentials.token)
         if (!fetched?.success) {
-          //  setMsgError(fetched.message)
-          if (!tokenStorage === undefined) {
+          if (!rdxUser.credentials.token === undefined) {
+            toast.warn(fetched.message, { theme: "dark" })
             throw new Error("Failed to fetch profile data")
           }
-          //  throw new Error("Failed to fetch profile data")
         }
         const data = await fetched
         setShowProfile(data.data)
@@ -40,9 +40,16 @@ export const Home = () => {
     }
 
     fetching()
-  }, [tokenStorage]) // Execute useEffect whenever the token changes
+  }, [rdxUser.credentials.token]) // Execute useEffect whenever the token changes
+
+  useEffect(() => {
+    if (!rdxUser.credentials.token) {
+      navigate("/login")
+    }
+  }, [rdxUser])
+
   const changeBackground = () => {
-    setActive(!active)
+    setActiveMenu(!activeMenu)
   }
 
   return (
@@ -50,7 +57,7 @@ export const Home = () => {
       <div className="boxContainer">
         <div className="headerContainer">
           <div
-            className={`title ${active ? "active" : ""}`}
+            className={`title ${activeMenu ? "active" : ""}`}
             id="Profile"
             onClick={() => changeBackground()}
           >
@@ -67,7 +74,7 @@ export const Home = () => {
             </svg>
           </div>
           <div
-            className={`title ${!active ? "active " : ""}`}
+            className={`title ${!activeMenu ? "active " : ""}`}
             id="ProfileSetting"
             onClick={() => changeBackground()}
           >
@@ -85,12 +92,12 @@ export const Home = () => {
             </svg>
           </div>
         </div>
-        {active && (
+        {activeMenu && (
           <div className="bodyProfile">
             <Post />
           </div>
         )}
-        {!active && (
+        {!activeMenu && (
           <div className="bodyProfileSetting">
             <Profile />
           </div>
@@ -100,6 +107,7 @@ export const Home = () => {
       <div className="homefooter">
         <div>Copyright 2024 Social Site Ltd. All Right Reserved. </div>
       </div>
+      <ToastContainer />
     </div>
   )
 }

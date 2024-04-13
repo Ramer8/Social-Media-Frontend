@@ -209,8 +209,8 @@ const Managment = () => {
         searchParam = `name=${searchUser}`
       }
       const fetched = await searchUsers(searchParam, rdxUser.credentials.token)
-      console.log(fetched)
       if (!fetched?.success) {
+        toast.error(fetched.message, { theme: "dark" })
         if (!rdxUser.credentials.token === undefined) {
           throw new Error("Failed to fetch Appointment data")
         }

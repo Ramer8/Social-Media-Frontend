@@ -62,13 +62,13 @@ const PostModal = ({
               functionEmit={closeModal}
             />
             <div className="bodyPostModal">
-              <labe className="labelTextArea">Edit your post</labe>
+              <label className="labelTextArea">Edit your post</label>
               <CustomInputTextArea
                 className="textareaNewPost textareaEditPost"
                 type={"text"}
                 name={"content"} //must be the key name idem like state newPost
                 disabled={""}
-                value={newPost.content || thePost.content || ""}
+                value={newPost.content || thePost.content || ""} //mirar para la edicion aqui
                 placeholder="write your post...."
                 functionChange={(e) => inputHandler(e)}
                 // onBlurFunction={(e) => checkError(e)}

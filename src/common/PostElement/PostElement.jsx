@@ -1,3 +1,4 @@
+import "./PostElement.css"
 import { useState } from "react"
 import {
   LeadingActions,
@@ -7,9 +8,12 @@ import {
   TrailingActions,
 } from "react-swipeable-list"
 import "react-swipeable-list/dist/styles.css"
+
 import { CustomButton } from "../CustomButton/CustomButton"
 import PostModal from "../PostModal/PostModal"
-import "./PostElement.css"
+import { useSelector } from "react-redux"
+
+import { userData } from "../../app/slices/userSlice"
 
 const PostElement = ({
   newPost,
@@ -24,6 +28,8 @@ const PostElement = ({
 
   const { createdAt, _id, content, likes, userId } = element
 
+  const rdxUser = useSelector(userData)
+
   const leadingActions = () => (
     <LeadingActions>
       <SwipeAction onClick={() => setModalIsOpen(true)}>Edit</SwipeAction>
@@ -31,7 +37,7 @@ const PostElement = ({
   )
   const trailingActions = () => (
     <TrailingActions>
-      <SwipeAction onClick={() => deleteMyPost(_id)} destructive={true}>
+      <SwipeAction onClick={() => deleteMyPost(_id)}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="29"
@@ -50,14 +56,37 @@ const PostElement = ({
     setModalIsOpenView(true)
     setModalIsOpen(true)
   }
+
   return (
     <div>
       <SwipeableList>
         <SwipeableListItem
-          leadingActions={leadingActions()}
-          trailingActions={trailingActions()}
+          leadingActions={
+            element.userId._id === rdxUser.credentials.tokenData.userId
+              ? leadingActions()
+              : ""
+          }
+          trailingActions={
+            element.userId._id === rdxUser.credentials.tokenData.userId
+              ? trailingActions()
+              : ""
+          }
         >
-          <div className="post" key={_id}>
+          <div
+            className={` post  tooltip ${
+              element.userId._id === rdxUser.credentials.tokenData.userId
+                ? "postHighlighted"
+                : ""
+            }`}
+            key={_id}
+          >
+            {element.userId._id === rdxUser.credentials.tokenData.userId ? (
+              <span className="hoverPostText">
+                <img src="../public/swipe3.svg" alt="swipe" />
+              </span>
+            ) : (
+              ""
+            )}
             <div className="headerPost">
               <div className="postOwner">{userId?.name}</div>
               <div className="date">
@@ -66,13 +95,7 @@ const PostElement = ({
                 {/* puedo hacer lo mismo con post de hoy o de ayer */}
               </div>
             </div>
-            <div
-              className="postContent"
-              // onClick={() => setModalIsOpenView(true)}
-              onClick={() => putModalOn()}
-              // hacer funcion para mostrar cita
-              //traer todas las citas de los usuarios.
-            >
+            <div className="postContent" onClick={() => putModalOn()}>
               {content}
             </div>
             <PostModal
@@ -128,6 +151,7 @@ const PostElement = ({
                       0
                     </>
                   }
+                  // functionEmit={() => msgPost(_id)} // not created!
                 />
               </div>
             </div>

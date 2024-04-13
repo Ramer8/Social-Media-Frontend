@@ -51,8 +51,8 @@ export const Login = () => {
   const logMe = async () => {
     for (let credencial in credenciales) {
       if (credenciales[credencial] === "") {
-        toast.error("No has rellenado todos los campos", {
-          theme: "dark",
+        toast.error("You must fill in all fields", {
+          theme: "colored",
           position: "top-left",
         })
 
@@ -62,12 +62,12 @@ export const Login = () => {
 
     const fetched = await loginMe(credenciales)
     if (!fetched.success) {
-      toast.error(fetched.message, { theme: "dark", position: "top-left" })
+      toast.error(fetched.message, { theme: "colored", position: "top-left" })
 
       return
     }
     if (fetched.success) {
-      toast.success(fetched.message, { theme: "dark", autoClose: 1500 })
+      toast.success(fetched.message, { theme: "colored", autoClose: 500 })
     }
 
     const decoded = {
@@ -92,9 +92,15 @@ export const Login = () => {
   useEffect(() => {
     toast.dismiss() //clear all the messages
     credencialesError.emailError &&
-      toast.warn(credencialesError.emailError, { theme: "dark" })
+      toast.warn(credencialesError.emailError, {
+        theme: "colored",
+        autoClose: 1500,
+      })
     credencialesError.passwordError &&
-      toast.warn(credencialesError.passwordError, { theme: "dark" })
+      toast.warn(credencialesError.passwordError, {
+        theme: "colored",
+        autoClose: 1500,
+      })
 
     setTimeout(() => {
       if (credencialesError.passwordError || credencialesError.emailError) {
@@ -144,7 +150,7 @@ export const Login = () => {
           Sign Up
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer position="top-left" autoClose={500} theme="colored" />
     </div>
   )
 }
