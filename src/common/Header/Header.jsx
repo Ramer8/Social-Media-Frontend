@@ -16,7 +16,6 @@ export const Header = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    console.log(rdxUser, "passport credentials")
     const fetch = async () => {
       const fetched = await fetchMyProfile(rdxUser.credentials.token)
 
@@ -29,25 +28,19 @@ export const Header = () => {
     fetch()
   }, [rdxUser])
 
-  // useEffect(() => {
-  //   if (!rdxUser.credentials.token) {
-  //     navigate("/login")
-  //   }
-  // }, [rdxUser])
-
   return (
     <>
       <div className="headerDesign">
         <div className="menu">
-          {/* {rdxUser?.credentials.tokenData.roleName === "super_admin" && ( */}
-          <CustomLink
-            title="Managment"
-            destination="/managment"
-            className={`${
-              location.pathname === "/managment" ? "menuHighlighted" : "menu"
-            }`}
-          />
-          {/* )} */}
+          {rdxUser?.super && (
+            <CustomLink
+              title="Managment"
+              destination="/managment"
+              className={`${
+                location.pathname === "/managment" ? "menuHighlighted" : "menu"
+              }`}
+            />
+          )}
         </div>
         <CustomLink
           title={
@@ -74,7 +67,13 @@ export const Header = () => {
                 location.pathname === "/profile" ? "menuHighlighted" : "menu"
               }`}
             />
-            <div onClick={() => dispatch(logout({ credentials: "" }))}>
+            <div
+              onClick={() =>
+                dispatch(
+                  logout({ credentials: "", online: false, super: false })
+                )
+              }
+            >
               <CustomLink
                 title={
                   <svg

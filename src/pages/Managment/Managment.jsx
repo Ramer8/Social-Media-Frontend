@@ -227,151 +227,158 @@ const Managment = () => {
   useEffect(() => {
     console.log(searchUserRdx?.criteriaUser)
   }, [searchUserRdx?.criteriaUser])
+
   return (
-    <div className="managmentDesign">
-      <div className="userContainer">
-        {!users?.length && "No users loaded"}
-        {users && (
-          <div className="userTable">
-            <div className="preHeader">
-              <div className="leftSide">
-                User list
-                {/* {arrayToDelete.length == !0 && `Selected ${arrayToDelete.length}`} */}
-              </div>
-              <CustomButton
-                className={"search"}
-                title={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-search"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                  </svg>
-                }
-                functionEmit={() => search()}
-              />
-              <div className="searchBar">
-                <CustomInput
-                  className="inputDesign searchInputUser"
-                  type="email"
-                  name="email"
-                  value={searchUser || ""}
-                  placeholder="search.."
-                  functionChange={inputHandler}
-                />
-              </div>
-              <CustomButton
-                className={"deleteUsers"}
-                title={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="22"
-                    fill="currentColor"
-                    className="bi bi-trash3-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                  </svg>
-                }
-                functionEmit={() => deleteUsers()}
-              />
-            </div>
-            <div className="header">
-              <div>ID</div>
-              <div>Name</div>
-              <div>Email</div>
-              <div>Role</div>
-            </div>
-            <div className="body-container">
-              <div className="body">
-                {users?.map((user) => (
-                  <div key={user._id} className="row">
-                    <div className="idUser">{user._id}</div>
-                    <div>{user.name}</div>
-                    <div>{user?.email}</div>
-                    <div className={`${user.role === "user" && "colorized"}`}>
-                      {user.role}
-                    </div>
-                    <div>
-                      <input
-                        id="s1"
-                        type="checkbox"
-                        className="switch"
-                        value={checkButton.state}
-                        onChange={() => handleCheck(user._id)}
-                      />
-                    </div>
+    <>
+      {rdxUser.super && (
+        <div className="managmentDesign">
+          <div className="userContainer">
+            {!users?.length && "No users loaded"}
+            {users && (
+              <div className="userTable">
+                <div className="preHeader">
+                  <div className="leftSide">
+                    User list
+                    {/* {arrayToDelete.length == !0 && `Selected ${arrayToDelete.length}`} */}
                   </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
-      <div className="postContainerTable">
-        {!posts?.length && "No posts loaded"}
-        {posts && (
-          <div className="PostsTable">
-            <div className="preHeader">
-              <div className="leftSide colorized">Post list</div>
-              <CustomButton
-                className={"deletePosts"}
-                title={
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="22"
-                    height="22"
-                    fill="currentColor"
-                    className="bi bi-trash3-fill"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
-                  </svg>
-                }
-                functionEmit={() => deletePosts()}
-              />
-            </div>
-            <div></div>
-            <div className="header">
-              <div>ID</div>
-              <div>Posts</div>
-              <div>Likes</div>
-              <div>Created at</div>
-              <div>Email</div>
-            </div>
-            <div className="body-container">
-              <div className="body">
-                {posts?.map((post) => (
-                  <div key={post._id} className="row">
-                    <div className="idUser">{post._id}</div>
-                    <div>{post.content}</div>
-                    <div>{post.likes.length}</div>
-                    <div>{new Date(post.createdAt).toDateString()}</div>
-                    <div>{post?.userId.email}</div>
-                    <div>{post?.userId._id}</div>
-                    <div>
-                      <input
-                        id="s1"
-                        type="checkbox"
-                        className="switch"
-                        value={checkButtonPost.state}
-                        onChange={() => handleCheckPost(post._id)}
-                      />
-                    </div>
+                  <CustomButton
+                    className={"search"}
+                    title={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="16"
+                        height="16"
+                        fill="currentColor"
+                        className="bi bi-search"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+                      </svg>
+                    }
+                    functionEmit={() => search()}
+                  />
+                  <div className="searchBar">
+                    <CustomInput
+                      className="inputDesign searchInputUser"
+                      type="email"
+                      name="email"
+                      value={searchUser || ""}
+                      placeholder="search.."
+                      functionChange={inputHandler}
+                    />
                   </div>
-                ))}
+                  <CustomButton
+                    className={"deleteUsers"}
+                    title={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        fill="currentColor"
+                        className="bi bi-trash3-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                      </svg>
+                    }
+                    functionEmit={() => deleteUsers()}
+                  />
+                </div>
+                <div className="header">
+                  <div>ID</div>
+                  <div>Name</div>
+                  <div>Email</div>
+                  <div>Role</div>
+                </div>
+                <div className="body-container">
+                  <div className="body">
+                    {users?.map((user) => (
+                      <div key={user._id} className="row">
+                        <div className="idUser">{user._id}</div>
+                        <div>{user.name}</div>
+                        <div>{user?.email}</div>
+                        <div
+                          className={`${user.role === "user" && "colorized"}`}
+                        >
+                          {user.role}
+                        </div>
+                        <div>
+                          <input
+                            id="s1"
+                            type="checkbox"
+                            className="switch"
+                            value={checkButton.state}
+                            onChange={() => handleCheck(user._id)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
-      </div>
-      <ToastContainer />
-    </div>
+          <div className="postContainerTable">
+            {!posts?.length && "No posts loaded"}
+            {posts && (
+              <div className="PostsTable">
+                <div className="preHeader">
+                  <div className="leftSide colorized">Post list</div>
+                  <CustomButton
+                    className={"deletePosts"}
+                    title={
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="22"
+                        height="22"
+                        fill="currentColor"
+                        className="bi bi-trash3-fill"
+                        viewBox="0 0 16 16"
+                      >
+                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                      </svg>
+                    }
+                    functionEmit={() => deletePosts()}
+                  />
+                </div>
+                <div></div>
+                <div className="header">
+                  <div>ID</div>
+                  <div>Posts</div>
+                  <div>Likes</div>
+                  <div>Created at</div>
+                  <div>Email</div>
+                </div>
+                <div className="body-container">
+                  <div className="body">
+                    {posts?.map((post) => (
+                      <div key={post._id} className="row">
+                        <div className="idUser">{post._id}</div>
+                        <div>{post.content}</div>
+                        <div>{post.likes.length}</div>
+                        <div>{new Date(post.createdAt).toDateString()}</div>
+                        <div>{post?.userId.email}</div>
+                        <div>{post?.userId._id}</div>
+                        <div>
+                          <input
+                            id="s1"
+                            type="checkbox"
+                            className="switch"
+                            value={checkButtonPost.state}
+                            onChange={() => handleCheckPost(post._id)}
+                          />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+          <ToastContainer />
+        </div>
+      )}
+    </>
   )
 }
 

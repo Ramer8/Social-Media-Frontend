@@ -123,8 +123,6 @@ const Post = () => {
 
   const editMyPost = async (id) => {
     try {
-      console.log(id, "el de edit post")
-      console.log(newPost, "el post que envio")
       const fetched = await updateMyPost(id, newPost, rdxUser.credentials.token)
       if (!fetched?.success) {
         if (!rdxUser.credentials.token === undefined) {

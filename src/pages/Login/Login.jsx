@@ -76,12 +76,15 @@ export const Login = () => {
     }
 
     dispatch(login({ credentials: decoded }))
+    dispatch(login({ online: true }))
 
     // Go to SuperAdmin Managment
     if (decoded?.tokenData?.roleName === "super_admin") {
       navigate("/managment")
+      dispatch(login({ super: true }))
       return
     }
+    dispatch(login({ super: false }))
 
     // Home redirected
     setTimeout(() => {
