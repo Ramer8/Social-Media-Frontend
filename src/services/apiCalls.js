@@ -205,8 +205,6 @@ export const deletePost = async (id, token) => {
 }
 
 export const updateMyPost = async (id, data, token) => {
-  console.log(id)
-  console.log(data)
   const options = {
     method: "PUT",
     headers: {

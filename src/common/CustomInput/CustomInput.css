@@ -37,7 +37,7 @@
 
 .searchInputUser {
     box-shadow: none;
-    background-color: grey;
+    background-color: rgb(42, 61, 82);
     font-weight: 700;
     display: flex;
     text-align: left;

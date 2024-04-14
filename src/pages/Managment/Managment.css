@@ -14,13 +14,29 @@
     border-radius: 1em;
     flex-direction: column;
     justify-content: space-around;
+    height: 50%;
+}
+
+.fulltableUser {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.messageTable {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 2em;
+    color: crimson;
+    font-weight: 700;
+    opacity: .8;
 }
 
 .postContainerTable {
-    max-width: 62%;
-    max-height: 20vh;
+    /* max-width: 62%; */
+    /* max-height: 20vh; */
     border: .5px solid gray;
-
+    height: 50%;
     margin-top: 1em;
     padding: 1em;
     border-radius: 1em;
@@ -28,8 +44,23 @@
     justify-content: center;
 }
 
+.postsTable {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.fulltablePost {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 .userTable {
     width: 100%;
+    overflow-x: hidden;
+}
+
+.datePost {
+    display: flex;
 }
 
 .preHeader {
@@ -37,6 +68,7 @@
     border-bottom: 1px solid gray;
     padding-bottom: .5em;
     gap: 1em;
+
 }
 
 .leftSide {
@@ -46,8 +78,6 @@
 
 .searchBar {
     display: flex;
-    gap: 1em;
-
 }
 
 
@@ -55,7 +85,6 @@
 
     flex: none;
     padding-right: 1em;
-    background-color: transparent;
     border: none;
     display: flex;
     justify-content: center;
@@ -67,10 +96,22 @@
     cursor: pointer;
 }
 
+.headerTitle {
+    font-weight: 700;
+    padding-top: .1em;
+    padding-bottom: .2em;
+    border-bottom: .1em solid gray;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
 
 
 .header,
 .row {
+
     display: table-row;
 }
 
@@ -78,6 +119,7 @@
     text-overflow: hidden;
     white-space: nowrap;
     overflow: scroll;
+    overflow: hidden;
 }
 
 
@@ -90,11 +132,12 @@
 
 .header>div {
     font-weight: bold;
+
 }
 
 .row:nth-child(even) {
 
-    background-color: dimgray;
+    color: rgb(106, 150, 201);
     /* Optional: Alternate row colors */
 }
 
@@ -109,11 +152,10 @@
 /* =================checkbox css */
 @supports(-webkit-appearance: none) or (-moz-appearance: none) {
 
-    input[type='checkbox'],
-    input[type='radio'] {
-        color: crimson;
+    input[type='checkbox'] {
+        /* color: crimson; */
         --active-inner: crimson;
-        --border: whitesmoke;
+        --border: #8492A6;
         --background: transparent;
         -webkit-appearance: none;
         -moz-appearance: none;
@@ -251,6 +293,7 @@ html {
 body {
     /* min-height: 100vh; */
     /* color: #8A91B4; */
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -268,17 +311,21 @@ body {
     }
 }
 
-@media (min-width: 300px) {
-    .card {
-        flex-basis: calc(65% - -.5em - -1.5em);
-        /* height: 90vh; */
-    }
 
-    .card:not(:last-child) {
-        margin-right: .5px;
+
+@media (min-width: 200px) {
+
+    .userContainer,
+    .table,
+    .preHeader,
+    .header {
+        width: 100%;
+        overflow-x: scroll;
 
     }
 }
+
+
 
 @media (min-width: 300px) {
 
@@ -299,7 +346,6 @@ body {
     .header {
         width: max-content;
         overflow-x: scroll;
-        overflow-x: scroll;
 
     }
 }
@@ -311,13 +357,4 @@ body {
     align-items: center;
     overflow-x: hidden;
 
-}
-
-.colorized {
-    color: darkviolet;
-    text-shadow:
-        1px 1px 2px black,
-        0 0 1em darkmagenta,
-        0 0 0.2em blue;
-    font-weight: 600;
 }

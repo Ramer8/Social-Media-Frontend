@@ -130,15 +130,12 @@ const Managment = () => {
         rdxUser.credentials.token
       )
       if (!fetched?.success) {
-        toast.warn(fetched.message, { theme: "dark" })
+        toast.warn(fetched.message, { theme: "colorized" })
 
         if (!rdxUser.credentials.token === undefined) {
           toast.warn("Failed to fetch users data", { theme: "dark" })
           throw new Error("Failed to fetch users data")
         }
-      }
-      if (fetched?.success) {
-        toast.success(fetched.message, { theme: "dark" })
       }
     } catch (error) {
       console.log(error)
@@ -210,86 +207,98 @@ const Managment = () => {
       }
       const fetched = await searchUsers(searchParam, rdxUser.credentials.token)
       if (!fetched?.success) {
-        toast.error(fetched.message, { theme: "dark" })
+        // toast.error(fetched.message, { theme: "dark" })
         if (!rdxUser.credentials.token === undefined) {
           throw new Error("Failed to fetch Appointment data")
         }
       }
-      if (fetched?.success) {
-        toast.warn(fetched.message, { theme: "dark" })
-      }
-      console.log(fetched.data)
       setUsers(fetched.data)
     } catch (error) {
       console.log(error)
     }
   }
+  const wipeSearch = () => {
+    setSearchUser("")
+  }
   useEffect(() => {
-    console.log(searchUserRdx?.criteriaUser)
+    search()
   }, [searchUserRdx?.criteriaUser])
+
+  // const columns = [
+  //   { key: "_id", label: "ID" },
+  //   { key: "name", label: "Name" },
+  //   { key: "email", label: "Email" },
+  //   { key: "role", label: "Role" },
+  // ]
 
   return (
     <>
       {rdxUser.super && (
         <div className="managmentDesign">
           <div className="userContainer">
-            {!users?.length && "No users loaded"}
-            {users && (
-              <div className="userTable">
-                <div className="preHeader">
-                  <div className="leftSide">
-                    User list
-                    {/* {arrayToDelete.length == !0 && `Selected ${arrayToDelete.length}`} */}
-                  </div>
-                  <CustomButton
-                    className={"search"}
-                    title={
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        fill="currentColor"
-                        className="bi bi-search"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                      </svg>
-                    }
-                    functionEmit={() => search()}
+            <div className="userTable">
+              <div className="preHeader">
+                <div className="leftSide">User list</div>
+                <div className="searchBar">
+                  <CustomInput
+                    className="inputDesign searchInputUser"
+                    type="email"
+                    name="email"
+                    value={searchUser || ""}
+                    placeholder={" search.."}
+                    functionChange={inputHandler}
                   />
-                  <div className="searchBar">
-                    <CustomInput
-                      className="inputDesign searchInputUser"
-                      type="email"
-                      name="email"
-                      value={searchUser || ""}
-                      placeholder="search.."
-                      functionChange={inputHandler}
-                    />
-                  </div>
                   <CustomButton
-                    className={"deleteUsers"}
+                    className="clear"
                     title={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        width="22"
-                        height="22"
+                        width="20"
+                        height="20"
                         fill="currentColor"
-                        className="bi bi-trash3-fill"
+                        className="bi bi-x-circle"
                         viewBox="0 0 16 16"
                       >
-                        <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                       </svg>
                     }
-                    functionEmit={() => deleteUsers()}
+                    functionEmit={() => wipeSearch()}
                   />
                 </div>
-                <div className="header">
+                <CustomButton
+                  className={"deleteUsers"}
+                  title={
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="22"
+                      height="22"
+                      fill="currentColor"
+                      className="bi bi-trash3-fill"
+                      viewBox="0 0 16 16"
+                    >
+                      <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5m-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5M4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06m6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528M8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5" />
+                    </svg>
+                  }
+                  functionEmit={() => deleteUsers()}
+                />
+              </div>
+              {/* <div>
+                  <CollapsibleTable data={users} columns={columns} />
+                </div> */}
+              <div className="fullTableUser">
+                <div className="headerTitle">
                   <div>ID</div>
                   <div>Name</div>
                   <div>Email</div>
                   <div>Role</div>
                 </div>
+                {!users?.length && (
+                  <div className="messageTable">
+                    Not users loaded or founded
+                  </div>
+                )}
+                {/* {users && rdxUser.online && ( */}
                 <div className="body-container">
                   <div className="body">
                     {users?.map((user) => (
@@ -298,7 +307,7 @@ const Managment = () => {
                         <div>{user.name}</div>
                         <div>{user?.email}</div>
                         <div
-                          className={`${user.role === "user" && "colorized"}`}
+                        // className={`${user.role === "user" && "colorized"}`}
                         >
                           {user.role}
                         </div>
@@ -316,16 +325,16 @@ const Managment = () => {
                   </div>
                 </div>
               </div>
-            )}
+            </div>
           </div>
           <div className="postContainerTable">
             {!posts?.length && "No posts loaded"}
             {posts && (
-              <div className="PostsTable">
+              <div className="postsTable">
                 <div className="preHeader">
                   <div className="leftSide colorized">Post list</div>
                   <CustomButton
-                    className={"deletePosts"}
+                    className={"deleteUsers"}
                     title={
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -341,35 +350,43 @@ const Managment = () => {
                     functionEmit={() => deletePosts()}
                   />
                 </div>
-                <div></div>
-                <div className="header">
-                  <div>ID</div>
-                  <div>Posts</div>
-                  <div>Likes</div>
-                  <div>Created at</div>
-                  <div>Email</div>
-                </div>
-                <div className="body-container">
-                  <div className="body">
-                    {posts?.map((post) => (
-                      <div key={post._id} className="row">
-                        <div className="idUser">{post._id}</div>
-                        <div>{post.content}</div>
-                        <div>{post.likes.length}</div>
-                        <div>{new Date(post.createdAt).toDateString()}</div>
-                        <div>{post?.userId.email}</div>
-                        <div>{post?.userId._id}</div>
-                        <div>
-                          <input
-                            id="s1"
-                            type="checkbox"
-                            className="switch"
-                            value={checkButtonPost.state}
-                            onChange={() => handleCheckPost(post._id)}
-                          />
+                <div className="fulltablePost">
+                  <div className="headerTitle">
+                    <div>ID</div>
+                    <div>Posts</div>
+                    <div>Likes</div>
+                    <div>Created at</div>
+                    <div>Email</div>
+                    <div>UserId</div>
+                  </div>
+                  <div className="body-container">
+                    <div className="body">
+                      {posts?.map((post) => (
+                        <div key={post._id} className="row">
+                          <div className="idUser">
+                            {"..." + post._id.substring(19, 24)}
+                          </div>
+                          <div>{post.content.substring(0, 15)}</div>
+                          <div>{post.likes.length}</div>
+                          <div className="datePost">
+                            {new Date(post.createdAt).toDateString()}
+                          </div>
+                          <div>{post?.userId.email}</div>
+                          <div>
+                            {"..." + post?.userId._id.substring(19, 24)}
+                          </div>
+                          <div>
+                            <input
+                              id="s1"
+                              type="checkbox"
+                              className="switch"
+                              value={checkButtonPost.state}
+                              onChange={() => handleCheckPost(post._id)}
+                            />
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
+                    </div>
                   </div>
                 </div>
               </div>

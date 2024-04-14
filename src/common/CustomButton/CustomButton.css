@@ -279,15 +279,18 @@
     }
 }
 
-.search {
+.clear {
+
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-around;
     align-items: center;
-    padding: 0em;
-    margin: 0em;
+    margin-left: -2em;
+    color: midnightblue;
+
 }
 
-.search:hover {
+.clear:hover {
     cursor: pointer;
     color: red;
 }
