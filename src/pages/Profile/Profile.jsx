@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { logout, userData } from "../../app/slices/userSlice"
 import { validame } from "../../utils/functions"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
+import { CustomInputTextArea } from "../../common/CustomInputTextArea/CustomInputTextArea"
 
 const Profile = () => {
   const [write, setWrite] = useState("disabled")
@@ -20,6 +21,11 @@ const Profile = () => {
 
   const [user, setUser] = useState({
     name: "",
+    gender: "",
+    birthday: "",
+    address: "",
+    phone: "",
+    bio: "",
   })
 
   const [userError, setUserError] = useState({
@@ -99,11 +105,19 @@ const Profile = () => {
 
   const updateData = async () => {
     if (!userError.name) {
+      console.log(user)
       try {
         const fetched = await updateProfile(user, rdxUser.credentials.token)
+
         setUser({
           name: fetched.data.name,
+          gender: fetched.data.gender,
+          birthday: fetched.data.birthday,
+          address: fetched.data.address,
+          phone: fetched.data.phone,
+          bio: fetched.data.bio,
         })
+        console.log(fetched)
         setWrite("disabled")
         toast.success(fetched.message, { theme: "dark" })
       } catch (error) {
@@ -125,7 +139,33 @@ const Profile = () => {
           <div>CARGANDO</div>
         ) : (
           <div className="boxProfile">
-            <div className="rowName">
+            <div className="titleHeader">Personal Information:</div>
+            <div className="headerProfile">
+              <img
+                className="pic"
+                src="/picporifile.jpeg"
+                width=""
+                alt="profilePic"
+              />
+              <div className="titlePic">Upload picture</div>
+              <div className="advicePicture">
+                For best results, use an image at least 256px by 256px in either
+                .jpg or .png format
+              </div>
+              <div className="buttonsPicture">
+                <CustomButton
+                  className={"primaryButton uploadProfile"}
+                  title={"Upload"}
+                  functionEmit={() => setWrite("")}
+                />
+                <CustomButton
+                  className={" primaryButton removeProfile"}
+                  title={"Remove"}
+                  functionEmit={() => setWrite("")}
+                />
+              </div>
+            </div>
+            <div className="formProfile">
               <label>Name:</label>
               <CustomInput
                 className={
@@ -141,15 +181,112 @@ const Profile = () => {
                 functionChange={(e) => inputHandler(e)}
                 onBlurFunction={(e) => checkError(e)}
               />
+              <label>Gender:</label>
+              <div className="gender">
+                <div>
+                  <input
+                    type="radio"
+                    id="female"
+                    name="gender"
+                    disabled={write}
+                    value={"female"}
+                    onChange={(e) => inputHandler(e)}
+                  />
+                  <label htmlFor="female">Female</label>
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    id="male"
+                    name="gender"
+                    value={"male"}
+                    onChange={(e) => inputHandler(e)}
+                  />
+                  <label htmlFor="male">Male</label>
+                </div>
+              </div>
+
+              <label>Birthday:</label>
+              <CustomInput
+                className={
+                  `inputDesign ${
+                    userError.nameError.length !== 0 ? "inputDesignError" : ""
+                  }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
+                }
+                type={"datetime-local"}
+                placeholder={""}
+                name={"birthday"}
+                disabled={write}
+                value={user.birthday || ""}
+                functionChange={(e) => inputHandler(e)}
+                // onBlurFunction={(e) => checkError(e)}
+              />
+              <label>Address:</label>
+              <CustomInput
+                className={
+                  `inputDesign ${
+                    userError.nameError.length !== 0 ? "inputDesignError" : ""
+                  }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
+                }
+                type={"text"}
+                placeholder={""}
+                name={"address"}
+                disabled={write}
+                value={user.address || ""}
+                functionChange={(e) => inputHandler(e)}
+                // onBlurFunction={(e) => checkError(e)}
+              />
+              <label>Phone no.</label>
+              <CustomInput
+                className={
+                  `inputDesign ${
+                    userError.nameError.length !== 0 ? "inputDesignError" : ""
+                  }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
+                }
+                type={"number"}
+                placeholder={""}
+                name={"phone"}
+                disabled={write}
+                value={user.phone || ""}
+                functionChange={(e) => inputHandler(e)}
+                // onBlurFunction={(e) => checkError(e)}
+              />
+              <label>Your Bio Here:</label>
+              <CustomInputTextArea
+                className={
+                  `inputDesign ${
+                    userError.nameError.length !== 0 ? "inputDesignError" : ""
+                  }` && ` inputDesign ${write === "" ? "" : "inputBlock"}`
+                }
+                type={"text"}
+                placeholder={""}
+                name={"bio"}
+                disabled={write}
+                value={user.bio || ""}
+                functionChange={(e) => inputHandler(e)}
+                // onBlurFunction={(e) => checkError(e)}
+              />
+              <CustomButton
+                className={
+                  write === ""
+                    ? "primaryButton updateData"
+                    : "primaryButton editButton"
+                }
+                title={write === "" ? "Save changes" : "Edit"}
+                functionEmit={write === "" ? updateData : () => setWrite("")}
+              />
+            </div>
+            <div className="formFooter">
+              <div className="titleFooter">Delete Account :</div>
+              <div className="deleteText">
+                Do you want to delete the account? Please press below
+                &quot;Delete&quot; button
+              </div>
             </div>
             <CustomButton
-              className={
-                write === ""
-                  ? "primaryButton updateData"
-                  : "primaryButton editButton"
-              }
-              title={write === "" ? "Save" : "Edit"}
-              functionEmit={write === "" ? updateData : () => setWrite("")}
+              className={"deleteProfile"}
+              title={"Delete Account"}
+              functionEmit={() => setWrite("")}
             />
           </div>
         )}

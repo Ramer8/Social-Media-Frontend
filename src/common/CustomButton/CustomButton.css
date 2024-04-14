@@ -26,6 +26,7 @@
     box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
 }
 
+
 .primaryButton:hover {
     cursor: pointer;
     color: #396cf0;
@@ -43,6 +44,57 @@
 
 .likes:hover {
     color: red;
+}
+
+.uploadProfile {
+    padding: 0em;
+    margin: 0em;
+    padding: .5rem 2rem;
+    height: auto;
+    width: auto;
+    margin: 1em;
+    /* padding-inline: 1.5em; */
+}
+
+
+.removeProfile {
+    padding: .5rem 2rem;
+    height: auto;
+    width: auto;
+    margin: 1em;
+    padding-inline: 1.5em;
+    color: #396cf0;
+    background-color: rgb(217, 227, 253);
+    box-shadow: 1px 1px 5px gray;
+}
+
+.removeProfile:hover {
+    background-color: #396cf0;
+    color: rgb(217, 227, 253);
+    ;
+}
+
+.deleteProfile {
+    border-radius: .5em;
+    background-color: coral;
+    color: whitesmoke;
+    padding-inline: 1em;
+    padding: .5em 1em;
+    font-weight: 600;
+    letter-spacing: .5px;
+    margin: 1em;
+    border: 1px solid rgb(252, 84, 23);
+    -webkit-box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
+    box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
+}
+
+
+.deleteProfile:hover {
+    background-color: whitesmoke;
+    color: coral;
+    cursor: pointer;
+    background-color: rgb(217, 227, 253);
+    box-shadow: 1px 1px 5px gray;
 }
 
 /* .registerButton {
@@ -68,10 +120,7 @@
     align-items: center;
 
     background-color: #396cf0;
-    border: 1px solid #396cf0;
-    -webkit-box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
-    box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
-}
+   
 
 .registerButton:hover {
     cursor: pointer;
@@ -157,6 +206,10 @@
     align-items: center;
     width: min-content;
     margin-inline: 1em;
+    border: 1px solid #396cf0;
+    -webkit-box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
+    box-shadow: 0 3px 5px 0 rgba(57, 108, 240, .3);
+}
 }
 
 .deleteAppointment:hover {
@@ -287,8 +340,8 @@
     align-items: center;
     margin-left: -2em;
     color: midnightblue;
-
 }
+
 
 .clear:hover {
     cursor: pointer;

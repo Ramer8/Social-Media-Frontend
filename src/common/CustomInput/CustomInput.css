@@ -38,7 +38,8 @@
 .searchInputUser {
     box-shadow: none;
     background-color: rgb(42, 61, 82);
-    font-weight: 700;
+    font-weight: 600;
+    color: #8492A6;
     display: flex;
     text-align: left;
     padding: .5em;
@@ -46,7 +47,6 @@
 }
 
 .searchInputUser::placeholder {
-    font-weight: bold;
     opacity: 0.5;
     color: black;
 }

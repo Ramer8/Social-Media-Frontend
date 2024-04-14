@@ -1,18 +1,20 @@
 .homeDesign {
-    height: 90vh;
+    height: 200vh;
     /* height: auto; */
     width: 100vw;
+    /* background-color: red; */
 
     flex-direction: column;
 
-    display: flex;
+    /* display: flex; */
     justify-content: center;
     align-items: center;
+
 }
 
 .boxContainer {
-    /* width: 50%;  when create the other profile box with pic active this line!*/
-    /* display: flex; */
+    /* width: 50%; */
+    /* when create the other profile box with pic active this line! */
     flex-direction: column;
     justify-content: center;
     align-items: center;
