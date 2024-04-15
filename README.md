@@ -2,18 +2,19 @@
 
 ---
 
-#### Mobil device 📱
+#### Mobil device Experience📱
 
 <img src="./public/mobileDemo.gif"/>
 
-#### Computer Device 💻
+---
+
+#### Desktop Experience 💻
 
 <img src="./public/pcRegister.gif"/>
 
 ---
 
-[![GITHUB]][github-url][![DOCKER]][docker-url]
-[![Mongo][MongoDB]][MongoDB-url][![Node][Node.JS]][Node.JS-url][![Express][Express.js]][Express.js-url]![REACT]![JAVASCRIPT]<a href="https://developer.mozilla.org/es/docs/Web/CSS"><img src= "https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>[![JWT]][JWT-url]
+[![GITHUB]][github-url][![DOCKER]][docker-url][![Mongo][MongoDB]][MongoDB-url][![Node][Node.JS]][Node.JS-url][![Express][Express.js]][Express.js-url]![REACT]![JAVASCRIPT]<a href="https://developer.mozilla.org/es/docs/Web/CSS"><img src= "https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>[![JWT]][JWT-url]
 
 [JWT]: https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens
 [JWT-url]: https://jwt.io/
@@ -54,7 +55,7 @@
 [docker-url]: https://www.docker.com/
 
 Very thanks for interest in this new project. It's the seventh project with Geekshubs Academy of the Full Stack Development Bootcamp 🚀.
-This is design of Social Media Backend ( the fifth project of the course.
+This is design of Social Media Backend ( the fifth project of the course ).
 
 ---
 
@@ -71,7 +72,7 @@ Is a SPA (single-page application) with react router dom to organize the routes.
 The frontend is already connected to mongoDB data base created in Social Media Backend.
 The data showed or the new users create are created in existing mongoDB data base.
 
-#### First Structure (Routes)
+#### First Data Base Structure
 
 - Users
 - Posts
@@ -82,7 +83,7 @@ The data showed or the new users create are created in existing mongoDB data bas
 
 #### Develop
 
-REST API design for FRONTEND
+##### REST API design for FRONTEND
 
 Create two main tables, User and Post. They are related to each other. The fields of the Post table are: post id, user id, comments, name, and likes.
 The User table fields are: name, email, password, role, following, and followers.
@@ -219,6 +220,11 @@ The User table fields are: name, email, password, role, following, and followers
 
 ---
 
+### Design
+
+The whole project is designed with CSS without external libraries.
+The design is fully responsive and with Dark or Light mode.
+
 #### Dark 🌘 and Light ☀️ Mode
 
 `http://localhost:5174`
@@ -231,6 +237,8 @@ The User table fields are: name, email, password, role, following, and followers
 ---
 
 #### App Depyoyed ⚙️
+
+`https://main.d1j6r9oao59ffd.amplifyapp.com/login`
 
 <ol>
 
@@ -256,11 +264,39 @@ Launch the project in your local device:
 
 ---
 
+### Libraries used
+
+I decided to use these libraries to get a good user experience in a short development time.
+
+#### React-modal
+
+`https://www.npmjs.com/package/react-modal`
+
+<img src="./public/react-modal.png"/>
+
+---
+
+#### React-swipeable-list
+
+`https://www.npmjs.com/package/react-swipeable-list`
+
+<img src="./public/react-swipeable-list.png"/>
+
+---
+
+#### React-Toastify
+
+`https://www.npmjs.com/package/react-toastify`
+
+<img src="./public/react-toastify.png"/>
+
+---
+
 ### Next steps ⎘
 
-Continue build components, buttons and inputs to from respective end points created in the backend and think in future features.
-Refactoring and testing code.
-Add update image to data base.
+Continue to build components, buttons and inputs from the respective endpoints created in the backend and think about future functionality.
+Refactoring and testing.
+Add update image to database, pagination.
 
 ---
 
