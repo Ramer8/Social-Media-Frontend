@@ -189,7 +189,7 @@ const Profile = () => {
                     id="female"
                     name="gender"
                     disabled={write}
-                    value={"female"}
+                    value={"Female"}
                     onChange={(e) => inputHandler(e)}
                   />
                   <label htmlFor="female">Female</label>
@@ -199,7 +199,7 @@ const Profile = () => {
                     type="radio"
                     id="male"
                     name="gender"
-                    value={"male"}
+                    value={"Male"}
                     onChange={(e) => inputHandler(e)}
                   />
                   <label htmlFor="male">Male</label>

@@ -122,4 +122,100 @@
     opacity: .5;
 }
 
-.bodyProfile {}
+.coverPage {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.backgroundHero {
+    /* background-image: url("https: //shreethemes.in/doctris/layouts/assets/images/bg/bg-profile.jpg"); */
+    /* background-image: "./bg-profile.jpeg"; */
+    /* background-size: cover; */
+    /* height: auto; */
+    width: 90%;
+}
+
+.picProfile {
+    margin: .5em;
+    border-radius: 50%;
+    width: 19%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name {
+    color: black;
+    font-weight: 500;
+}
+
+.age {
+    font-weight: 600;
+}
+
+.bodyProfile {
+    width: 80vh;
+    /* height: 100vh; */
+    /* luego quitar */
+}
+
+.percentageBlock {
+
+    width: 95%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: .5em;
+}
+
+.titleProfile {
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    font-weight: 600;
+}
+
+.percentBar {
+    /* background-color: #e9ecef; */
+    /*is more lighty*/
+    height: .7em;
+    background-color: #9fb3cf;
+    width: 95%;
+    border-radius: 2em;
+}
+
+.percent {
+    height: .7em;
+    background-color: #386cf0;
+    border-radius: 2em;
+}
+
+.dataProfile {
+
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+
+    margin: 1em;
+    gap: .5em;
+}
+
+.row {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    font-weight: 500;
+}
+
+.key {
+    color: black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
