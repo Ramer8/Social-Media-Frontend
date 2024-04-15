@@ -95,7 +95,7 @@ export const Home = () => {
           </div>
           <img
             className="picProfile"
-            src="/picporifile.jpeg"
+            src="/avatarMale.png"
             width=""
             alt="profilePic"
           />
@@ -184,7 +184,7 @@ export const Home = () => {
                       ? ""
                       : formatDateToHumansWay(showProfile?.birthday)
                   }`}
-                  {/* x  {formatDateToHumansWay(showProfile.birthday)}{" "} */}
+                  {/* {formatDateToHumansWay(showProfile.birthday)}{" "} */}
                 </div>
               </div>
               <div className="row">

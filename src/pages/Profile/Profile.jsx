@@ -81,12 +81,14 @@ const Profile = () => {
             toast.error(fetched.message, {
               theme: "dark",
               position: "top-left",
+              autoClose: 500,
             })
             return
           }
           toast.error(fetched.message, {
             theme: "dark",
             position: "top-left",
+            autoClose: 500,
           })
           navigate("/login")
           return
@@ -110,6 +112,7 @@ const Profile = () => {
       try {
         const fetched = await updateProfile(user, rdxUser.credentials.token)
 
+        toast.success(fetched.message, { theme: "dark", autoClose: 500 })
         setUser({
           name: fetched.data.name,
           gender: fetched.data.gender,
@@ -120,7 +123,6 @@ const Profile = () => {
         })
         console.log(fetched)
         setWrite("disabled")
-        toast.success(fetched.message, { theme: "dark", autoClose: 500 })
       } catch (error) {
         console.log(error)
       }
@@ -128,10 +130,11 @@ const Profile = () => {
       return
     }
   }
-  useEffect(() => {
-    toast.dismiss()
-    userError.nameError && toast.warn(userError.nameError, { theme: "dark" })
-  }, [userError])
+  // useEffect(() => {
+  //   toast.dismiss()
+
+  //   userError.nameError && toast.warn(userError.nameError, { theme: "dark" })
+  // }, [userError, write])
 
   return (
     <>
@@ -145,7 +148,7 @@ const Profile = () => {
             <div className="headerProfile">
               <img
                 className="pic"
-                src="/picporifile.jpeg"
+                src="/avatarMale.png"
                 width=""
                 alt="profilePic"
               />
