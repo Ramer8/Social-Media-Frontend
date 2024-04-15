@@ -30,12 +30,9 @@
 }
 
 .boxProfile {
-    /* min-width: 80%; */
-    /* height: 75vh; */
-    /* height: auto; */
-    /* width: 50%; */
+
     border-radius: .5em;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
     width: 100%;
     /* padding-right: 2em; */
 
@@ -63,6 +60,10 @@
     justify-content: start;
     align-items: start;
     color: black;
+    text-shadow:
+        /* 1px 1px 1px white, */
+        /* 0 0 1em blue, */
+        0 0 0.3em whitesmoke;
 }
 
 .pic {
@@ -77,6 +78,10 @@
     font-size: 1.3em;
     font-weight: 600;
     color: black;
+    text-shadow:
+        /* 1px 1px 1px white, */
+        /* 0 0 1em blue, */
+        0 0 0.2em whitesmoke;
 }
 
 .advicePicture {

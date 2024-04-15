@@ -131,14 +131,10 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
 }
 
 .backgroundHero {
-    /* background-image: url("https: //shreethemes.in/doctris/layouts/assets/images/bg/bg-profile.jpg"); */
-    /* background-image: "./bg-profile.jpeg"; */
-    /* background-size: cover; */
-    /* height: auto; */
     width: 100%;
 }
 
@@ -154,6 +150,10 @@
 
 .name {
     color: black;
+    text-shadow:
+        /* 1px 1px 1px white, */
+        /* 0 0 1em blue, */
+        0 0 0.3em whitesmoke;
     font-weight: 500;
 }
 
@@ -226,6 +226,10 @@
 
 .key {
     color: black;
+    text-shadow:
+        /* 1px 1px 1px white, */
+        /* 0 0 1em blue, */
+        0 0 0.3em whitesmoke;
     display: flex;
     justify-content: center;
     flex-direction: column;

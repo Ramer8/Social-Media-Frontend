@@ -58,18 +58,23 @@ export const calulateAge = (birthday) => {
 }
 
 export const calculateProgress = (objcetToArray) => {
-  let arrayPercentage = Object?.values(objcetToArray)
-  let value = 0
-  for (let i = 10; i < 15; i++) {
-    if (arrayPercentage[i] !== "") {
+  if (!objcetToArray) {
+    console.log("not load")
+  } else {
+    console.log("loading")
+    let arrayPercentage = Object?.values(objcetToArray)
+    let value = 0
+    for (let i = 10; i < 15; i++) {
+      if (arrayPercentage[i] !== "") {
+        value = value + 16.66
+      }
+    }
+    if (arrayPercentage[1] !== "") {
       value = value + 16.66
     }
+    value = Math.round(value)
+    return value
   }
-  if (arrayPercentage[1] !== "") {
-    value = value + 16.66
-  }
-  value = Math.round(value)
-  return value
 }
 
 export const formatDateToHumansWay = (dateString) => {

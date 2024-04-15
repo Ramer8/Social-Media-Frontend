@@ -13,6 +13,7 @@ import { logout, userData } from "../../app/slices/userSlice"
 import { validame } from "../../utils/functions"
 import { CustomButton } from "../../common/CustomButton/CustomButton"
 import { CustomInputTextArea } from "../../common/CustomInputTextArea/CustomInputTextArea"
+import Spinner from "../../common/Spinner/Spinner"
 
 const Profile = () => {
   const [write, setWrite] = useState("disabled")
@@ -119,7 +120,7 @@ const Profile = () => {
         })
         console.log(fetched)
         setWrite("disabled")
-        toast.success(fetched.message, { theme: "dark" })
+        toast.success(fetched.message, { theme: "dark", autoClose: 500 })
       } catch (error) {
         console.log(error)
       }
@@ -136,8 +137,9 @@ const Profile = () => {
     <>
       <div className="profileDesign">
         {!loadedData ? (
-          <div>CARGANDO</div>
+          <div>CARGADNDO</div>
         ) : (
+          // <Spinner />
           <div className="boxProfile">
             <div className="titleHeader">Personal Information:</div>
             <div className="headerProfile">

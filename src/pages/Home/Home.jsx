@@ -7,21 +7,21 @@ import "./Home.css"
 import Profile from "../Profile/Profile"
 import Post from "../Post/Post"
 import { searchUserData } from "../../app/slices/searchUserSlice"
-import { useSelector } from "react-redux"
-import { userData } from "../../app/slices/userSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { logout, userData } from "../../app/slices/userSlice"
 import {
   calculateProgress,
   calulateAge,
-  formatDate,
   formatDateToHumansWay,
 } from "../../utils/functions"
 
 export const Home = () => {
   const [activeMenu, setActiveMenu] = useState(false)
   const [showProfile, setShowProfile] = useState()
+  const [loadedData, setLoadedData] = useState(false)
 
   const navigate = useNavigate()
-
+  const dispatch = useDispatch()
   const rdxUser = useSelector(userData)
 
   const searchCriteria = useSelector(searchUserData)
@@ -33,10 +33,23 @@ export const Home = () => {
       try {
         const fetched = await fetchMyProfile(rdxUser.credentials.token)
         if (!fetched?.success) {
-          if (!rdxUser.credentials.token === undefined) {
-            toast.warn(fetched.message, { theme: "dark", autoClose: 500 })
-            throw new Error("Failed to fetch profile data")
+          if (fetched.message === "JWT NOT VALID OR TOKEN MALFORMED") {
+            dispatch(logout({ credentials: "" }))
+
+            toast.error(fetched.message, {
+              theme: "dark",
+              position: "top-left",
+              autoClose: 500,
+            })
+            return
           }
+          toast.error(fetched.message, {
+            theme: "dark",
+            position: "top-left",
+            autoClose: 500,
+          })
+          navigate("/login")
+          return
         }
         const data = await fetched
         setShowProfile(data.data)
@@ -45,22 +58,30 @@ export const Home = () => {
       }
     }
 
-    fetching()
+    if (!loadedData) {
+      fetching()
+    }
   }, [rdxUser.credentials.token]) // Execute useEffect whenever the token changes
 
   useEffect(() => {
     if (!rdxUser.credentials.token) {
       navigate("/login")
     }
+    setLoadedData(true)
   }, [rdxUser])
 
   const changeBackground = () => {
     setActiveMenu(!activeMenu)
   }
 
+  // console.log(!showProfile, " show y loaded ", !loadedData)
+
   return (
     <div className="homeDesign">
-      {showProfile && (
+      {!loadedData && !showProfile ? (
+        <div>CARGADNDO</div>
+      ) : (
+        // <Spinner />
         <div className="coverPage">
           <div className="headerCoverPage">
             <div className="backgroundHero">
@@ -78,10 +99,10 @@ export const Home = () => {
             width=""
             alt="profilePic"
           />
-          <div className="name">{showProfile.name}</div>
+          <div className="name">{showProfile?.name}</div>
           <div className="age">
             {`${
-              isNaN(calulateAge(showProfile.birthday))
+              isNaN(calulateAge(showProfile?.birthday))
                 ? ""
                 : calulateAge(showProfile.birthday) + " Years old"
             }`}
@@ -90,12 +111,34 @@ export const Home = () => {
             <div className="percentageBlock">
               <div className="titleProfile">
                 <div>Complete Your Profile</div>
-                <div>{calculateProgress(showProfile)}%</div>
+                <div>
+                  {`${
+                    !showProfile
+                      ? ""
+                      : Object?.values(showProfile).length === 10
+                      ? "16.66%"
+                      : calculateProgress(showProfile) + "%"
+                  }`}
+
+                  {/* {`${
+                    Object?.values(showProfile).length === 10
+                      ? "16.66%"
+                      : calculateProgress(showProfile) + "%"
+                  }`} */}
+                </div>
               </div>
               <div className="percentBar">
                 <div
                   className="percent"
-                  style={{ width: `${calculateProgress(showProfile)}%` }}
+                  style={{
+                    width: `${
+                      showProfile !== undefined &&
+                      Object?.values(showProfile).length === 10
+                        ? "16.66%"
+                        : calculateProgress(showProfile) + "%"
+                    }`,
+                  }}
+                  // style={{ width: `${calculateProgress(showProfile)}%` }}
                 >
                   .
                 </div>
@@ -119,7 +162,7 @@ export const Home = () => {
                   </svg>{" "}
                   Gender
                 </div>
-                <div className="gender">{showProfile.gender}</div>
+                <div className="gender">{showProfile?.gender}</div>
               </div>
               <div className="row">
                 <div className="key">
@@ -136,7 +179,12 @@ export const Home = () => {
                   Birthday
                 </div>
                 <div className="birthday">
-                  {formatDateToHumansWay(showProfile.birthday)}{" "}
+                  {`${
+                    isNaN(showProfile?.birthday)
+                      ? ""
+                      : formatDateToHumansWay(showProfile?.birthday)
+                  }`}
+                  {/* x  {formatDateToHumansWay(showProfile.birthday)}{" "} */}
                 </div>
               </div>
               <div className="row">
@@ -154,7 +202,7 @@ export const Home = () => {
                   </svg>{" "}
                   Phone No.
                 </div>
-                <div className="phone">{showProfile.phone}</div>
+                <div className="phone">{showProfile?.phone}</div>
               </div>
               <div className="row">
                 <div className="key">
@@ -173,7 +221,7 @@ export const Home = () => {
                   </svg>{" "}
                   Address
                 </div>
-                <div className="address">{showProfile.address}</div>
+                <div className="address">{showProfile?.address}</div>
               </div>
             </div>
           </div>
