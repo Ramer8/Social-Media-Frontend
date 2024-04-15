@@ -2,13 +2,11 @@
 
 ---
 
- <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="darkblue" class="bi bi-facebook" viewBox="0 0 16 16">
-  <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951"/>
-</svg>
+#### Mobil device 📱
 
-<h4> Social Media </h4>
+<img src="./public/mobileDemo.gif"/>
 
----
+#### Computer Device 💻
 
 <img src="./public/pcRegister.gif"/>
 
@@ -55,7 +53,8 @@
 [DOCKER]: https://img.shields.io/badge/docker-2496ED?style=for-the-badge&logo=docker&logoColor=white
 [docker-url]: https://www.docker.com/
 
-Very thanks for interest in my project. Is first design of Social Media Backend ( the fifth project with Geekshubs Academy of the Full Stack Development Bootcamp 🚀).
+Very thanks for interest in this new project. It's the seventh project with Geekshubs Academy of the Full Stack Development Bootcamp 🚀.
+This is design of Social Media Backend ( the fifth project of the course.
 
 ---
 
@@ -174,12 +173,101 @@ The User table fields are: name, email, password, role, following, and followers
 
 ---
 
-#### Mobil device 📱
+#### Super Admin Dashboard
 
-### Next steps
+<img src="./public/SuperAdminDashboard.png"/>
 
-Continue build components, buttons and inputs to from respective end points created in the backend
-Add Redux to use a global state to binding data of components.
-Add testing.
+`http://localhost:5174/managment`
 
 ---
+
+#### Search User & Delete Post
+
+<img src="./public/search&delete.gif"/>
+
+`http://localhost:5174/managment`
+
+---
+
+#### Search User & Delete severals
+
+<img src="./public/search&deleteUsers.gif"/>
+
+`http://localhost:5174/managment`
+
+---
+
+#### Mobil device 📱
+
+##### Register page
+
+`http://localhost:5174/register`
+
+<img src="./public/registerMobile.png"/>
+
+---
+
+#### Login page & check inputs errors
+
+`http://localhost:5174/login`
+
+<img src="./public/errors.png"/>
+
+---
+
+#### Home page
+
+---
+
+#### Dark 🌘 and Light ☀️ Mode
+
+`http://localhost:5174`
+
+<img src="./public/darkMode.png"/>
+<img src="./public/lightMode.png"/>
+
+</div>
+
+---
+
+#### App Depyoyed ⚙️
+
+<ol>
+
+<li> Clone Repo
+
+`npm install`
+
+</li>
+
+<li>
+
+Launch the project in your local device:
+
+`npm run dev`
+
+</li>
+
+</ol>
+
+<li>Then in localhost:PORT, will be launched the application, and you will be on the landing page (Home).
+
+</li>
+
+---
+
+### Next steps ⎘
+
+Continue build components, buttons and inputs to from respective end points created in the backend and think in future features.
+Refactoring and testing code.
+Add update image to data base.
+
+---
+
+## Contact
+
+<a href = "mailto:ramirolpoblete@gmail.com"><img src="https://img.shields.io/badge/Gmail-C6362C?style=for-the-badge&logo=gmail&logoColor=white" target="_blank"></a>
+<a href="https://www.linkedin.com/in/ramiropoblete/" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a>
+<a href = "https://github.com/Ramer8"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" target="_blank"></a>
+
+</p>
