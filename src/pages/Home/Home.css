@@ -1,14 +1,18 @@
 .homeDesign {
-    height: 200vh;
-    /* height: auto; */
+    /* height: 170vh; */
+    max-height: fit-content;
     width: 100vw;
+
     /* background-color: red; */
 
     flex-direction: column;
 
-    /* display: flex; */
+    display: flex;
     justify-content: center;
     align-items: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+
 
 }
 
@@ -100,7 +104,7 @@
 
 .homefooter {
     height: 5vh;
-    width: 100vw;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -127,6 +131,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid gray;
 }
 
 .backgroundHero {
@@ -134,11 +139,12 @@
     /* background-image: "./bg-profile.jpeg"; */
     /* background-size: cover; */
     /* height: auto; */
-    width: 90%;
+    width: 100%;
 }
 
 .picProfile {
-    margin: .5em;
+    margin-top: -3em;
+    margin-bottom: .5em;
     border-radius: 50%;
     width: 19%;
     display: flex;
@@ -152,11 +158,15 @@
 }
 
 .age {
+    margin-top: .5em;
     font-weight: 600;
+    padding-bottom: 1em;
 }
 
 .bodyProfile {
-    width: 80vh;
+    width: 100%;
+    padding: 1em;
+    border-radius: .3em;
     /* height: 100vh; */
     /* luego quitar */
 }
@@ -193,6 +203,7 @@
     height: .7em;
     background-color: #386cf0;
     border-radius: 2em;
+    color: #1b2836;
 }
 
 .dataProfile {
@@ -218,4 +229,31 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+@media(min-width: 500px) {
+
+    .coverPage,
+    .homefooter {
+        width: 70%;
+
+    }
+}
+
+@media(min-width: 700px) {
+
+    .coverPage,
+    .homefooter {
+        width: 45%;
+
+    }
+}
+
+@media(min-width: 1000px) {
+
+    .coverPage,
+    .homefooter {
+        width: 50%;
+
+    }
 }

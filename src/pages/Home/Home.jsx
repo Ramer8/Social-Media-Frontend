@@ -34,7 +34,7 @@ export const Home = () => {
         const fetched = await fetchMyProfile(rdxUser.credentials.token)
         if (!fetched?.success) {
           if (!rdxUser.credentials.token === undefined) {
-            toast.warn(fetched.message, { theme: "dark" })
+            toast.warn(fetched.message, { theme: "dark", autoClose: 500 })
             throw new Error("Failed to fetch profile data")
           }
         }
