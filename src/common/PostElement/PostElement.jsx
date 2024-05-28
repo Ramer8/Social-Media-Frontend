@@ -13,9 +13,9 @@ import { CustomButton } from "../CustomButton/CustomButton"
 import PostModal from "../PostModal/PostModal"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import swipe from "/swipe3.svg"
 
-import { logout, userData } from "../../app/slices/userSlice"
-import { useDispatch } from "react-redux"
+import { userData } from "../../app/slices/userSlice"
 
 const PostElement = ({
   newPost,
@@ -37,6 +37,7 @@ const PostElement = ({
     if (!rdxUser.credentials.token) {
       navigate("/login")
     }
+    // eslint-disable-next-line
   }, [rdxUser])
 
   const leadingActions = () => (
@@ -93,7 +94,7 @@ const PostElement = ({
               >
                 {userId?._id === rdxUser?.credentials.tokenData.userId ? (
                   <span className="hoverPostText">
-                    <img src="../public/swipe3.svg" alt="swipe" />
+                    <img src={swipe} alt="swipe" />
                   </span>
                 ) : (
                   ""

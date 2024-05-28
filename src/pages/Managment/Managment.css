@@ -154,6 +154,7 @@
 
     input[type='checkbox'] {
         /* color: crimson; */
+
         --active-inner: crimson;
         --border: #8492A6;
         --background: transparent;

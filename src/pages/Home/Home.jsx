@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { fetchMyProfile, searchUsers } from "../../services/apiCalls"
+import { fetchMyProfile } from "../../services/apiCalls"
 import { useNavigate } from "react-router-dom"
 import { ToastContainer, toast } from "react-toastify"
 
@@ -24,9 +24,8 @@ export const Home = () => {
   const dispatch = useDispatch()
   const rdxUser = useSelector(userData)
 
+  // eslint-disable-next-line
   const searchCriteria = useSelector(searchUserData)
-  // console.log(searchCriteria)  if not use this I can delete it!
-  // when arrive to home view load the value from magament by redux
 
   useEffect(() => {
     const fetching = async () => {
@@ -53,6 +52,7 @@ export const Home = () => {
         }
         const data = await fetched
         setShowProfile(data.data)
+        console.log(data.data)
       } catch (error) {
         console.error(error)
       }
@@ -61,6 +61,7 @@ export const Home = () => {
     if (!loadedData) {
       fetching()
     }
+    // eslint-disable-next-line
   }, [rdxUser.credentials.token]) // Execute useEffect whenever the token changes
 
   useEffect(() => {
@@ -68,6 +69,7 @@ export const Home = () => {
       navigate("/login")
     }
     setLoadedData(true)
+    // eslint-disable-next-line
   }, [rdxUser])
 
   const changeBackground = () => {

@@ -111,6 +111,7 @@ const Managment = () => {
     } else {
       arrayToDelete.push(id)
     }
+    console.log(arrayToDelete)
     setCheckButton(false)
 
     // setUsersToDelete({ usersId: arrayToDelete })

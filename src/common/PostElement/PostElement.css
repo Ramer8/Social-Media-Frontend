@@ -45,7 +45,7 @@
     /* Position the tooltip */
     position: absolute;
     z-index: 1;
-    margin: 0em 15em;
+    margin: 0em 10em;
     transition: 0.3s;
 }
 
